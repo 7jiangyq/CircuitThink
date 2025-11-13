@@ -1,0 +1,802 @@
+[
+  {
+    "id": "001",
+    "image": "001.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1032,
+    "length": 710,
+    "answer": "<think>\n <step1>\n VDD(Port)[[371, 32, 757, 52]]\n GND(Port)[[30, 243, 76, 284], [254, 616, 303, 665], [382, 330, 427, 378], [510, 362, 555, 409], [702, 617, 746, 664], [798, 617, 842, 664]]\n Vout(Port)[[871, 442, 895, 467]]\n </step1>\n <step2>\n I1(CurrentSource)[[688, 503, 762, 579]]\n M1(NMOS)[[338, 224, 411, 303]]\n CX(Capacitor)[[504, 279, 561, 315]]\n M2(NMOS)[[657, 160, 733, 242]]\n RF(Resistor)[[508, 429, 567, 480]]\n CY(Capacitor)[[792, 535, 848, 570]]\n CA(Capacitor)[[249, 534, 304, 570]]\n RD(Resistor)[[379, 76, 432, 136]]\n Iin(VoltageSource)[[114, 228, 187, 299]]\n </step2>\n <step3>\n node1: [I1.+, M1.S, CX, GND, CY, CA, Iin.-]\n node2: [I1.-, M2.S, RF, CY, Vout]\n node3: [M1.G, RF, CA, Iin.+]\n node4: [M1.D, CX, M2.G, RD]\n node5: [M2.D, RD, VDD]\n </step3>\n </think>\n\n <answer>\n [I1 node1 node2 CurrentSource]\n [M1 node3 node4 node1 NMOS]\n [CX node4 node1 Capacitor]\n [M2 node4 node5 node2 NMOS]\n [RF node3 node2 Resistor]\n [GND node1 0]\n [CY node2 node1 Capacitor]\n [CA node3 node1 Capacitor]\n [RD node5 node4 Resistor]\n [Vout node2 0]\n [Iin node3 node1 VoltageSource]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "002",
+    "image": "002.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 872,
+    "length": 742,
+    "answer": "<think>\n <step1>\n VDD(Port)[[399, 67, 659, 86]]\n GND(Port)[[295, 681, 335, 722], [506, 485, 545, 525], [718, 682, 754, 722]]\n VB(Port)[[200, 616, 220, 636]]\n </step1>\n <step2>\n L1(Inductor)[[395, 100, 448, 181]]\n L2(Inductor)[[605, 100, 659, 181]]\n M2(NMOS)[[577, 278, 636, 343]]\n M1(NMOS)[[416, 278, 475, 343]]\n ISS(CurrentSource)[[495, 393, 556, 454]]\n Cu2(Capacitor)[[712, 455, 760, 488]]\n Cu(Capacitor)[[292, 456, 338, 488]]\n S1(PMOS)[[493, 545, 558, 605]]\n S2(NMOS)[[258, 594, 319, 659]]\n S3(NMOS)[[680, 594, 741, 659]]\n </step2>\n <step3>\n node1: [VDD, L1, L2]\n node2: [L1, L2, M1.G, M2.G, M1.D, M2.D, Cu, Cu2]\n node3: [M2.S, M1.S, ISS.-]\n node4: [ISS.+, GND, S2.S, S3.S]\n node5: [Cu2, S1.S, S3.D]\n node6: [Cu, S1.D, S2.D]\n node7: [S1.G, S2.G, S3.G, VB]\n </step3>\n </think>\n\n <answer>\n [VB node7 0]\n [VDD node1 0]\n [GND node4 0]\n [L1 node1 node2 Inductor]\n [L2 node1 node2 Inductor]\n [Cu node2 node6 Capacitor]\n [M2 node2 node2 node3 NMOS]\n [M1 node2 node2 node3 NMOS]\n [Cu2 node2 node5 Capacitor]\n [S1 node7 node6 node5 PMOS]\n [S2 node7 node6 node4 NMOS]\n [S3 node7 node5 node4 NMOS]\n [ISS node4 node3 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "003",
+    "image": "003.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 744,
+    "length": 572,
+    "answer": "<think>\n <step1>\n VDD(Port)[[170, 49, 564, 69]]\n GND(Port)[[350, 530, 384, 566]]\n </step1>\n <step2>\n ISS(CurrentSource)[[341, 449, 395, 502]]\n M1(NMOS)[[198, 334, 253, 394]]\n M2(NMOS)[[482, 334, 537, 394]]\n L2(Inductor)[[439, 148, 486, 224]]\n C2(Capacitor)[[628, 176, 672, 205]]\n L1(Inductor)[[250, 149, 297, 224]]\n RP2(Resistor)[[513, 169, 552, 212]]\n RP(Resistor)[[184, 169, 224, 212]]\n C1(Capacitor)[[63, 176, 106, 205]]\n </step2>\n <step3>\n node1: [ISS.+, GND]\n node2: [ISS.-, M1.S, M2.S]\n node3: [M1.G, M2.D, L2, C2, RP2]\n node4: [M1.D, M2.G, L1, RP, C1]\n node5: [L2, C2, L1, RP2, RP, C1, VDD]\n </step3>\n </think>\n\n <answer>\n [ISS node1 node2 CurrentSource]\n [M1 node3 node4 node2 NMOS]\n [M2 node4 node3 node2 NMOS]\n [GND node1 0]\n [L2 node5 node3 Inductor]\n [C2 node5 node3 Capacitor]\n [L1 node5 node4 Inductor]\n [RP2 node5 node3 Resistor]\n [RP node5 node4 Resistor]\n [C1 node5 node4 Capacitor]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "004",
+    "image": "004.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 804,
+    "length": 596,
+    "answer": "<think>\n <step1>\n VDD(Port)[[184, 52, 634, 69], [321, 143, 521, 160]]\n GND(Port)[[58, 414, 92, 452], [126, 548, 159, 583], [195, 549, 229, 583], [402, 494, 437, 530], [514, 547, 549, 584], [586, 548, 621, 586], [701, 438, 736, 476]]\n </step1>\n <step2>\n M4(PMOS)[[554, 97, 609, 155]]\n Ma(NMOS)[[302, 304, 355, 361]]\n M3(PMOS)[[209, 98, 261, 156]]\n Mb(NMOS)[[482, 304, 538, 363]]\n Mc(PMOS)[[347, 167, 397, 224]]\n ISS(CurrentSource)[[393, 414, 448, 468]]\n Md(PMOS)[[441, 167, 494, 224]]\n R3(Resistor)[[58, 359, 96, 402]]\n R2(Resistor)[[698, 380, 738, 424]]\n R1(Resistor)[[583, 363, 621, 408]]\n Q1(PNP)[[169, 441, 220, 510]]\n Q2(PNP)[[558, 442, 607, 511]]\n </step2>\n <step3>\n node1: [M4.G, Ma.D, M3.G, Mc.D]\n node2: [M4.D, Mb.G, R2, R1]\n node3: [M4.S, M3.S, Mc.S, Md.S, VDD]\n node4: [Ma.G, M3.D, R3, Q1.E]\n node5: [Ma.S, Mb.S, ISS.-]\n node6: [GND, ISS.+, R3, R2, Q1.C, Q1.B, Q2.C, Q2.B]\n node7: [Mb.D, Md.D]\n node8: [Mc.G, Md.G]\n node9: [R1, Q2.E]\n </step3>\n </think>\n\n <answer>\n [VDD node3 0]\n [GND node6 0]\n [M4 node1 node2 node3 PMOS]\n [Ma node4 node1 node5 NMOS]\n [M3 node1 node4 node3 PMOS]\n [Mb node2 node7 node5 NMOS]\n [Mc node8 node1 node3 PMOS]\n [ISS node6 node5 CurrentSource]\n [Md node8 node7 node3 PMOS]\n [R3 node4 node6 Resistor]\n [R2 node2 node6 Resistor]\n [R1 node2 node9 Resistor]\n [Q1 node6 node6 node4 PNP]\n [Q2 node6 node6 node9 PNP]\n  </answer>"
+  },
+  {
+    "id": "005",
+    "image": "005.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 740,
+    "length": 520,
+    "answer": "<think>\n <step1>\n VDD(Port)[[257, 29, 540, 46]]\n GND(Port)[[13, 180, 46, 213], [175, 452, 207, 487], [266, 245, 300, 281], [359, 270, 394, 305], [498, 453, 530, 487], [566, 453, 600, 488]]\n Vout(Port)[[619, 327, 636, 344]]\n </step1>\n <step2>\n IS(CurrentSource)[[488, 371, 542, 424]]\n Iin(CurrentSource)[[74, 170, 128, 222]]\n CA(Capacitor)[[174, 393, 212, 419]]\n M1(NMOS)[[234, 168, 288, 225]]\n M2(NMOS)[[464, 123, 520, 181]]\n CX(Capacitor)[[356, 210, 397, 235]]\n RF(Resistor)[[358, 315, 398, 354]]\n CY(Capacitor)[[563, 393, 603, 419]]\n RD(Resistor)[[264, 62, 303, 104]]\n </step2>\n <step3>\n node1: [IS.+, GND, Iin.-, CA, M1.S, CX, CY]\n node2: [IS.-, M2.S, RF, CY, Vout]\n node3: [Iin.+, CA, M1.G, RF]\n node4: [M1.D, M2.G, CX, RD]\n node5: [M2.D, RD, VDD]\n </step3>\n </think>\n\n <answer>\n [IS node1 node2 CurrentSource]\n [GND node1 0]\n [Iin node3 node1 CurrentSource]\n [CA node3 node1 Capacitor]\n [M1 node3 node4 node1 NMOS]\n [M2 node4 node5 node2 NMOS]\n [CX node4 node1 Capacitor]\n [RF node3 node2 Resistor]\n [CY node2 node1 Capacitor]\n [RD node5 node4 Resistor]\n [Vout node2 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "006",
+    "image": "006.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1288,
+    "length": 510,
+    "answer": "<think>\n <step1>\n VDD(Port)[[156, 40, 887, 66]]\n GND(Port)[[162, 389, 205, 434], [284, 389, 328, 434], [495, 389, 541, 434], [620, 388, 662, 435], [835, 390, 875, 435], [955, 390, 997, 436]]\n Vout(Port)[[1148, 222, 1171, 244]]\n </step1>\n <step2>\n M1(NMOS)[[118, 257, 189, 331]]\n M2(NMOS)[[455, 257, 525, 334]]\n M3(NMOS)[[791, 256, 859, 334]]\n CL3(Capacitor)[[952, 313, 1004, 344]]\n CL1(Capacitor)[[280, 311, 333, 343]]\n CL2(Capacitor)[[615, 311, 668, 343]]\n RD1(Resistor)[[160, 115, 211, 172]]\n RD3(Resistor)[[831, 115, 879, 172]]\n RD2(Resistor)[[495, 114, 544, 174]]\n </step2>\n <step3>\n node1: [M1.G, M3.D, CL3, RD3, Vout]\n node2: [M1.D, M2.G, CL1, RD1]\n node3: [M1.S, M2.S, M3.S, CL3, GND, CL1, CL2]\n node4: [M2.D, M3.G, CL2, RD2]\n node5: [RD1, RD3, RD2, VDD]\n </step3>\n </think>\n\n <answer>\n [M1 node1 node2 node3 NMOS]\n [M2 node2 node4 node3 NMOS]\n [M3 node4 node1 node3 NMOS]\n [CL3 node1 node3 Capacitor]\n [GND node3 0]\n [CL1 node2 node3 Capacitor]\n [CL2 node4 node3 Capacitor]\n [RD1 node5 node2 Resistor]\n [RD3 node5 node1 Resistor]\n [Vout node1 0]\n [RD2 node5 node4 Resistor]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "007",
+    "image": "007.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 710,
+    "length": 480,
+    "answer": "<think>\n <step1>\n VDD(Port)[[131, 72, 507, 90]]\n GND(Port)[[137, 409, 169, 442], [468, 409, 499, 442]]\n Vout(Port)[[606, 310, 623, 326]]\n </step1>\n <step2>\n LP2(Inductor)[[397, 163, 441, 233]]\n LP(Inductor)[[66, 164, 110, 233]]\n RP2(Resistor)[[465, 181, 502, 221]]\n RP(Resistor)[[137, 183, 173, 223]]\n CP2(Capacitor)[[573, 190, 612, 215]]\n CP(Capacitor)[[245, 190, 282, 217]]\n M2(NMOS)[[438, 336, 489, 391]]\n M1(NMOS)[[107, 336, 158, 391]]\n </step2>\n <step3>\n node1: [VDD, LP2, LP, RP2, RP, CP2, CP]\n node2: [LP2, RP2, CP2, Vout, M2.D, M1.G]\n node3: [LP, RP, CP, M2.G, M1.D]\n node4: [M2.S, M1.S, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node4 0]\n [Vout node2 0]\n [LP node1 node3 Inductor]\n [RP node1 node3 Resistor]\n [LP2 node1 node2 Inductor]\n [RP2 node1 node2 Resistor]\n [CP node1 node3 Capacitor]\n [CP2 node1 node2 Capacitor]\n [M2 node3 node2 node4 NMOS]\n [M1 node2 node3 node4 NMOS]\n  </answer>"
+  },
+  {
+    "id": "008",
+    "image": "008.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1030,
+    "length": 396,
+    "answer": "<think>\n <step1>\n VDD(Port)[[169, 52, 696, 71]]\n GND(Port)[[173, 304, 205, 336], [263, 304, 295, 336], [416, 304, 446, 336], [502, 303, 536, 336], [656, 304, 689, 336], [745, 304, 776, 336]]\n Vout(Port)[[883, 182, 899, 200]]\n </step1>\n <step2>\n RD2(Resistor)[[412, 106, 450, 149]]\n RD3(Resistor)[[656, 106, 691, 148]]\n RD1(Resistor)[[171, 106, 208, 148]]\n M3(NMOS)[[626, 209, 678, 263]]\n M1(NMOS)[[143, 209, 195, 263]]\n M2(NMOS)[[385, 209, 436, 263]]\n CL2(Capacitor)[[499, 247, 539, 271]]\n CL1(Capacitor)[[259, 247, 296, 271]]\n CL3(Capacitor)[[741, 248, 780, 272]]\n </step2>\n <step3>\n node1: [VDD, RD2, RD3, RD1]\n node2: [RD2, M3.G, M2.D, CL2]\n node3: [RD3, Vout, M3.D, M1.G, CL3]\n node4: [RD1, M1.D, M2.G, CL1]\n node5: [M3.S, M1.S, M2.S, CL2, CL1, CL3, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node5 0]\n [Vout node3 0]\n [RD2 node1 node2 Resistor]\n [RD3 node1 node3 Resistor]\n [RD1 node1 node4 Resistor]\n [M3 node2 node3 node5 NMOS]\n [M1 node3 node4 node5 NMOS]\n [M2 node4 node2 node5 NMOS]\n [CL2 node2 node5 Capacitor]\n [CL1 node4 node5 Capacitor]\n [CL3 node3 node5 Capacitor]\n  </answer>"
+  },
+  {
+    "id": "009",
+    "image": "009.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 770,
+    "length": 674,
+    "answer": "<think>\n <step1>\n VDD(Port)[[283, 54, 601, 73]]\n GND(Port)[[117, 592, 150, 624], [293, 624, 325, 657], [447, 492, 479, 525], [558, 459, 590, 492]]\n </step1>\n <step2>\n LB(Inductor)[[288, 521, 332, 587]]\n L1(Inductor)[[288, 103, 332, 174]]\n M1(NMOS)[[306, 386, 357, 440]]\n M2(NMOS)[[305, 275, 356, 330]]\n IREF(CurrentSource)[[548, 229, 600, 279]]\n MB(NMOS)[[526, 385, 579, 441]]\n R1(Resistor)[[446, 121, 483, 162]]\n Vin(VoltageSource)[[107, 521, 160, 573]]\n CB(Capacitor)[[445, 447, 484, 473]]\n C1(Capacitor)[[357, 130, 395, 155]]\n RS(Resistor)[[181, 459, 223, 497]]\n </step2>\n <step3>\n node1: [LB, M1.S, RS]\n node2: [LB, GND, MB.S, Vin.-, CB]\n node3: [L1, M2.G, IREF.-, R1, C1, VDD]\n node4: [L1, M2.D, R1, C1]\n node5: [M1.G, IREF.+, MB.G, MB.D, CB]\n node6: [M1.D, M2.S]\n node7: [Vin.+, RS]\n </step3>\n </think>\n\n <answer>\n [VDD node3 0]\n [GND node2 0]\n [LB node1 node2 Inductor]\n [L1 node3 node4 Inductor]\n [M1 node5 node6 node1 NMOS]\n [M2 node3 node4 node6 NMOS]\n [IREF node5 node3 CurrentSource]\n [MB node5 node5 node2 NMOS]\n [R1 node3 node4 Resistor]\n [Vin node7 node2 VoltageSource]\n [CB node5 node2 Capacitor]\n [C1 node3 node4 Capacitor]\n [RS node7 node1 Resistor]\n  </answer>"
+  },
+  {
+    "id": "010",
+    "image": "010.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 506,
+    "length": 536,
+    "answer": "<think>\n <step1>\n VDD(Port)[[200, 46, 250, 64]]\n GND(Port)[[100, 492, 131, 524], [210, 492, 240, 524]]\n Vb(Port)[[129, 328, 145, 344]]\n Vout(Port)[[393, 239, 409, 256]]\n </step1>\n <step2>\n Iin(CurrentSource)[[91, 415, 141, 464]]\n Ib(CurrentSource)[[199, 415, 251, 465]]\n CP(Capacitor)[[317, 164, 356, 189]]\n LP(Inductor)[[139, 138, 182, 206]]\n C2(Capacitor)[[317, 318, 356, 342]]\n M1(NMOS)[[178, 309, 230, 364]]\n RP(Resistor)[[207, 155, 244, 195]]\n </step2>\n <step3>\n node1: [GND, Iin.-, Ib.+]\n node2: [Iin.+, Ib.-, C2, M1.S]\n node3: [CP, LP, VDD, RP]\n node4: [CP, LP, C2, M1.D, RP, Vout]\n node5: [M1.G, Vb]\n </step3>\n </think>\n\n <answer>\n [GND node1 0]\n [VDD node3 0]\n [Vout node4 0]\n [Vb node5 0]\n [Iin node2 node1 CurrentSource]\n [Ib node1 node2 CurrentSource]\n [CP node3 node4 Capacitor]\n [LP node3 node4 Inductor]\n [C2 node4 node2 Capacitor]\n [M1 node5 node4 node2 NMOS]\n [RP node3 node4 Resistor]\n  </answer>"
+  },
+  {
+    "id": "011",
+    "image": "011.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 724,
+    "length": 614,
+    "answer": "<think>\n <step1>\n VDD(Port)[[140, 23, 633, 44]]\n GND(Port)[[81, 559, 113, 593], [150, 559, 182, 593], [280, 559, 313, 593], [457, 559, 489, 593], [587, 559, 619, 593], [656, 559, 688, 593]]\n </step1>\n <step2>\n M6(PMOS)[[557, 91, 608, 146]]\n M5(PMOS)[[161, 91, 212, 146]]\n M4(PMOS)[[425, 91, 476, 146]]\n M3(PMOS)[[293, 92, 344, 148]]\n M1(NMOS)[[293, 223, 343, 279]]\n M2(NMOS)[[425, 223, 478, 279]]\n R1(Resistor)[[277, 311, 317, 353]]\n Q2(PNP)[[468, 383, 514, 449]]\n Q1(PNP)[[255, 384, 302, 452]]\n Q4(PNP)[[599, 455, 646, 519]]\n Q3(PNP)[[123, 455, 170, 519]]\n </step2>\n <step3>\n node1: [VDD, M6.S, M5.S, M4.S, M3.S]\n node2: [M6.G, M5.G, M4.G, M4.D, M3.G, M2.D]\n node3: [M6.D, Q2.B, Q4.E]\n node4: [M5.D, Q1.B, Q3.E]\n node5: [M3.D, M1.G, M1.D, M2.G]\n node6: [M1.S, R1]\n node7: [M2.S, Q2.E]\n node8: [R1, Q1.E]\n node9: [Q2.C, Q1.C, Q4.C, Q4.B, Q3.C, Q3.B, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node9 0]\n [R1 node6 node8 Resistor]\n [Q2 node9 node3 node7 PNP]\n [Q1 node9 node4 node8 PNP]\n [Q4 node9 node9 node3 PNP]\n [Q3 node9 node9 node4 PNP]\n [M6 node2 node3 node1 PMOS]\n [M5 node2 node4 node1 PMOS]\n [M4 node2 node2 node1 PMOS]\n [M3 node2 node5 node1 PMOS]\n [M1 node5 node5 node6 NMOS]\n [M2 node5 node2 node7 NMOS]\n  </answer>"
+  },
+  {
+    "id": "012",
+    "image": "012.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 902,
+    "length": 758,
+    "answer": "<think>\n <step1>\n VDD(Port)[[97, 55, 775, 73]]\n GND(Port)[[111, 351, 157, 400], [206, 319, 250, 366], [236, 638, 282, 687], [332, 607, 378, 653], [556, 671, 602, 717], [685, 608, 729, 657]]\n Vin(Port)[[88, 432, 111, 455]]\n Vout(Port)[[439, 206, 462, 230]]\n Vb(Port)[[471, 304, 495, 328]]\n </step1>\n <step2>\n M3(PMOS)[[289, 86, 362, 163]]\n M4(PMOS)[[128, 86, 198, 163]]\n I1(CurrentSource)[[671, 208, 743, 280]]\n C2(Capacitor)[[201, 239, 255, 273]]\n I2(CurrentSource)[[96, 239, 169, 313]]\n M1(NMOS)[[350, 277, 424, 357]]\n M0(NMOS)[[638, 499, 714, 578]]\n M2(NMOS)[[350, 500, 424, 578]]\n Iin(CurrentSource)[[223, 522, 298, 595]]\n C1(Capacitor)[[552, 589, 606, 623]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S, I1.-]\n node2: [M3.G, M4.G, M4.D, C2, I2.-]\n node3: [M3.D, Vout, M1.D]\n node4: [I1.+, M0.G, M0.D, M2.G, C1]\n node5: [C2, I2.+, GND, M0.S, M2.S, Iin.+, C1]\n node6: [M1.G, Vb]\n node7: [M1.S, Vin, M2.D, Iin.-]\n </step3>\n </think>\n\n <answer>\n [Vb node6 0]\n [VDD node1 0]\n [GND node5 0]\n [Vin node7 0]\n [Vout node3 0]\n [C2 node2 node5 Capacitor]\n [C1 node4 node5 Capacitor]\n [M3 node2 node3 node1 PMOS]\n [M4 node2 node2 node1 PMOS]\n [M1 node6 node3 node7 NMOS]\n [M0 node4 node4 node5 NMOS]\n [M2 node4 node7 node5 NMOS]\n [I1 node4 node1 CurrentSource]\n [I2 node5 node2 CurrentSource]\n [Iin node5 node7 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "013",
+    "image": "013.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1012,
+    "length": 608,
+    "answer": "<think>\n <step1>\n VDD(Port)[[240, 62, 860, 81]]\n GND(Port)[[530, 564, 564, 599]]\n Vcont(Port)[[140, 458, 156, 475]]\n </step1>\n <step2>\n ISS(CurrentSource)[[520, 482, 575, 535]]\n M2(NMOS)[[661, 345, 716, 403]]\n M1(NMOS)[[378, 346, 433, 405]]\n L2(Inductor)[[617, 114, 664, 189]]\n C1(Capacitor)[[807, 143, 849, 171]]\n L1(Inductor)[[430, 113, 478, 187]]\n C1(Capacitor)[[245, 143, 288, 171]]\n RP2(Resistor)[[692, 134, 730, 177]]\n RP(Resistor)[[364, 133, 403, 178]]\n MV1(NMOS)[[238, 371, 294, 426]]\n MV2(NMOS)[[799, 371, 855, 423]]\n </step2>\n <step3>\n node1: [ISS.+, GND]\n node2: [ISS.-, M2.S, M1.S]\n node3: [M2.G, M1.D, C1, L1, RP, MV1.G]\n node4: [M2.D, M1.G, L2, RP2, MV2.G]\n node5: [L2, C1, L1, RP2, RP, VDD]\n node6: [Vcont, MV1.D, MV1.S, MV2.D, MV2.S]\n </step3>\n </think>\n\n <answer>\n [ISS node1 node2 CurrentSource]\n [M2 node3 node4 node2 NMOS]\n [M1 node4 node3 node2 NMOS]\n [GND node1 0]\n [L2 node5 node4 Inductor]\n [C1 node5 node3 Capacitor]\n [L1 node5 node3 Inductor]\n [RP2 node5 node4 Resistor]\n [RP node5 node3 Resistor]\n [Vcont node6 0]\n [MV1 node3 node6 node6 NMOS]\n [VDD node5 0]\n [MV2 node4 node6 node6 NMOS]\n  </answer>"
+  },
+  {
+    "id": "014",
+    "image": "014.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 860,
+    "length": 776,
+    "answer": "<think>\n <step1>\n VDD(Port)[[164, 65, 675, 88]]\n GND(Port)[[89, 691, 130, 735], [175, 692, 216, 735], [309, 691, 350, 735], [398, 692, 438, 735], [531, 691, 571, 735], [617, 692, 657, 735]]\n Vout(Port)[[709, 394, 729, 414]]\n </step1>\n <step2>\n M3(PMOS)[[192, 148, 255, 218]]\n M5(PMOS)[[580, 150, 643, 219]]\n M4(PMOS)[[358, 150, 420, 219]]\n M1(NMOS)[[190, 313, 254, 383]]\n M2(NMOS)[[357, 313, 424, 383]]\n R2(Resistor)[[614, 453, 660, 507]]\n R1(Resistor)[[392, 456, 442, 507]]\n Q1(PNP)[[146, 563, 202, 643]]\n Q2(PNP)[[365, 564, 423, 644]]\n Q3(PNP)[[585, 564, 643, 644]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M5.S, M4.S]\n node2: [M3.G, M5.G, M4.G, M4.D, M2.D]\n node3: [M3.D, M1.G, M1.D, M2.G]\n node4: [M5.D, Vout, R2]\n node5: [M1.S, Q1.E]\n node6: [M2.S, R1]\n node7: [R2, Q3.E]\n node8: [R1, Q2.E]\n node9: [Q1.C, Q1.B, Q2.C, Q2.B, Q3.C, Q3.B, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node9 0]\n [Vout node4 0]\n [R2 node4 node7 Resistor]\n [R1 node6 node8 Resistor]\n [Q1 node9 node9 node5 PNP]\n [Q2 node9 node9 node8 PNP]\n [Q3 node9 node9 node7 PNP]\n [M3 node2 node3 node1 PMOS]\n [M5 node2 node4 node1 PMOS]\n [M4 node2 node2 node1 PMOS]\n [M1 node3 node3 node5 NMOS]\n [M2 node3 node2 node6 NMOS]\n  </answer>"
+  },
+  {
+    "id": "015",
+    "image": "015.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 860,
+    "length": 640,
+    "answer": "<think>\n <step1>\n VDD(Port)[[322, 41, 592, 59]]\n GND(Port)[[440, 578, 478, 618]]\n Vcont(Port)[[132, 458, 151, 478]]\n </step1>\n <step2>\n M3(PMOS)[[349, 68, 407, 132]]\n M4(PMOS)[[510, 68, 569, 132]]\n LXY(Inductor)[[411, 232, 493, 284]]\n M2(NMOS)[[510, 332, 569, 398]]\n M1(NMOS)[[349, 333, 409, 398]]\n MV1(NMOS)[[189, 360, 253, 423]]\n MV2(NMOS)[[663, 362, 727, 422]]\n ISS(CurrentSource)[[428, 496, 489, 556]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M4.D, LXY, M2.D, M1.G, MV2.G]\n node3: [M3.D, M4.G, LXY, M2.G, M1.D, MV1.G]\n node4: [M2.S, M1.S, ISS.-]\n node5: [MV1.D, MV1.S, MV2.D, MV2.S, Vcont]\n node6: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node6 0]\n [Vcont node5 0]\n [LXY node3 node2 Inductor]\n [M3 node2 node3 node1 PMOS]\n [M4 node3 node2 node1 PMOS]\n [M2 node3 node2 node4 NMOS]\n [M1 node2 node3 node4 NMOS]\n [MV1 node3 node5 node5 NMOS]\n [MV2 node2 node5 node5 NMOS]\n [ISS node6 node4 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "016",
+    "image": "016.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1162,
+    "length": 480,
+    "answer": "<think>\n <step1>\n VDD(Port)[[185, 37, 1080, 52]]\n GND(Port)[[153, 439, 184, 471], [264, 439, 296, 472], [503, 372, 535, 405], [615, 373, 645, 406], [680, 373, 713, 406], [834, 373, 867, 406], [899, 374, 932, 407], [1009, 373, 1040, 406]]\n Vb(Port)[[74, 383, 89, 402]]\n Vin1(Port)[[73, 187, 90, 202]]\n Vin2(Port)[[359, 188, 375, 206]]\n </step1>\n <step2>\n M11(NMOS)[[123, 366, 173, 420]]\n M4(PMOS)[[911, 82, 961, 136]]\n M9(PMOS)[[123, 170, 174, 224]]\n M10(PMOS)[[275, 170, 326, 223]]\n M5(NMOS)[[473, 300, 524, 354]]\n M8(PMOS)[[1002, 82, 1051, 135]]\n ISS(CurrentSource)[[199, 77, 251, 127]]\n M7(PMOS)[[493, 81, 545, 135]]\n M2(PMOS)[[585, 81, 634, 135]]\n M1(NMOS)[[584, 301, 635, 354]]\n M3(NMOS)[[913, 301, 962, 354]]\n M12(NMOS)[[232, 366, 283, 420]]\n M6(NMOS)[[1022, 300, 1072, 354]]\n CL(Capacitor)[[830, 318, 868, 343]]\n CL2(Capacitor)[[678, 318, 715, 342]]\n </step2>\n <step3>\n node1: [M11.G, M12.G, Vb]\n node2: [M11.D, M9.D]\n node3: [M11.S, M5.S, M1.S, GND, M3.S, M12.S, M6.S, CL, CL2]\n node4: [M4.G, M5.D, M8.G, M8.D]\n node5: [M4.D, M3.D, CL]\n node6: [M4.S, M8.S, ISS.-, M7.S, M2.S, VDD]\n node7: [M9.G, Vin1]\n node8: [M9.S, M10.S, ISS.+]\n node9: [M10.G, Vin2]\n node10: [M10.D, M3.G, M12.D, M6.G]\n node11: [M5.G, M1.G]\n node12: [M7.G, M7.D, M2.G, M6.D]\n node13: [M2.D, M1.D, CL2]\n </step3>\n </think>\n\n <answer>\n [M11 node1 node2 node3 NMOS]\n [M4 node4 node5 node6 PMOS]\n [M9 node7 node2 node8 PMOS]\n [M10 node9 node10 node8 PMOS]\n [M5 node11 node4 node3 NMOS]\n [M8 node4 node4 node6 PMOS]\n [ISS node8 node6 CurrentSource]\n [M7 node12 node12 node6 PMOS]\n [M2 node12 node13 node6 PMOS]\n [M1 node11 node13 node3 NMOS]\n [GND node3 0]\n [M3 node10 node5 node3 NMOS]\n [M12 node1 node10 node3 NMOS]\n [M6 node10 node12 node3 NMOS]\n [CL node5 node3 Capacitor]\n [CL2 node13 node3 Capacitor]\n [Vb node1 0]\n [Vin1 node7 0]\n [VDD node6 0]\n [Vin2 node9 0]\n  </answer>"
+  },
+  {
+    "id": "017",
+    "image": "017.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 840,
+    "length": 434,
+    "answer": "<think>\n <step1>\n VDD(Port)[[124, 44, 731, 62]]\n GND(Port)[[158, 382, 190, 416], [267, 383, 299, 416], [334, 383, 366, 416], [488, 383, 519, 416], [555, 383, 586, 416], [663, 382, 696, 416]]\n Vin(Port)[[79, 326, 96, 343]]\n Vin2(Port)[[758, 326, 775, 343]]\n </step1>\n <step2>\n M5(NMOS)[[127, 309, 179, 363]]\n M6(NMOS)[[676, 309, 726, 363]]\n M3(NMOS)[[567, 309, 617, 364]]\n M1(NMOS)[[237, 309, 287, 363]]\n M2(PMOS)[[239, 89, 289, 144]]\n M3(PMOS)[[566, 89, 614, 144]]\n M8(PMOS)[[655, 89, 705, 143]]\n CL(Capacitor)[[484, 325, 523, 351]]\n M7(PMOS)[[149, 89, 199, 144]]\n CL2(Capacitor)[[330, 325, 370, 351]]\n </step2>\n <step3>\n node1: [M5.G, M1.G, Vin]\n node2: [M5.D, M6.G, M3.G, M8.G, M8.D, Vin2]\n node3: [M5.S, M6.S, M3.S, M1.S, GND, CL, CL2]\n node4: [M6.D, M2.G, M7.G, M7.D]\n node5: [M3.D, CL]\n node6: [M1.D, M2.D, CL2]\n node7: [M2.S, M8.S, M7.S, VDD]\n </step3>\n </think>\n\n <answer>\n [M5 node1 node2 node3 NMOS]\n [M6 node2 node4 node3 NMOS]\n [M3 node2 node5 node3 NMOS]\n [M1 node1 node6 node3 NMOS]\n [M2 node4 node6 node7 PMOS]\n [M8 node2 node2 node7 PMOS]\n [GND node3 0]\n [CL node5 node3 Capacitor]\n [M7 node4 node4 node7 PMOS]\n [CL2 node6 node3 Capacitor]\n [Vin node1 0]\n [Vin2 node2 0]\n [VDD node7 0]\n  </answer>"
+  },
+  {
+    "id": "018",
+    "image": "018.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 692,
+    "length": 686,
+    "answer": "<think>\n <step1>\n GND(Port)[[9, 300, 55, 342], [146, 597, 190, 642], [146, 27, 190, 73], [389, 566, 432, 612], [390, 116, 433, 165], [482, 567, 524, 612]]\n Vout(Port)[[553, 399, 575, 421]]\n </step1>\n <step2>\n M9(PMOS)[[348, 222, 416, 298]]\n M4(NMOS)[[103, 283, 173, 357]]\n CL(Capacitor)[[478, 490, 528, 522]]\n RL(Resistor)[[390, 477, 436, 533]]\n Req(Resistor)[[145, 112, 193, 165]]\n Iin(CurrentSource)[[133, 491, 203, 562]]\n CC(Capacitor)[[281, 385, 316, 438]]\n </step2>\n <step3>\n node1: [GND, M9.S, M4.G, CL, RL, Req, Iin.-]\n node2: [M9.G, M4.D, Req]\n node3: [M9.D, CL, RL, CC, Vout]\n node4: [M4.S, Iin.+, CC]\n </step3>\n </think>\n\n <answer>\n [GND node1 0]\n [M9 node2 node3 node1 PMOS]\n [M4 node1 node2 node4 NMOS]\n [CL node3 node1 Capacitor]\n [RL node3 node1 Resistor]\n [Req node1 node2 Resistor]\n [Iin node4 node1 CurrentSource]\n [CC node4 node3 Capacitor]\n [Vout node3 0]\n  </answer>"
+  },
+  {
+    "id": "019",
+    "image": "019.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 742,
+    "length": 480,
+    "answer": "<think>\n <step1>\n VDD(Port)[[174, 53, 563, 71]]\n GND(Port)[[183, 414, 218, 451], [513, 412, 548, 451]]\n </step1>\n <step2>\n M1(NMOS)[[197, 334, 252, 395]]\n L1(Inductor)[[248, 151, 294, 224]]\n L2(Inductor)[[438, 151, 485, 225]]\n M2(NMOS)[[481, 335, 536, 395]]\n C2(Capacitor)[[629, 178, 668, 206]]\n RP(Resistor)[[181, 171, 219, 214]]\n RP2(Resistor)[[511, 170, 550, 214]]\n C1(Capacitor)[[63, 178, 105, 206]]\n </step2>\n <step3>\n node1: [GND, M1.S, M2.S]\n node2: [M1.G, L2, M2.D, C2, RP2]\n node3: [M1.D, L1, M2.G, RP, C1]\n node4: [L1, L2, C2, RP, RP2, C1, VDD]\n </step3>\n </think>\n\n <answer>\n [GND node1 0]\n [M1 node2 node3 node1 NMOS]\n [L1 node4 node3 Inductor]\n [L2 node4 node2 Inductor]\n [M2 node3 node2 node1 NMOS]\n [C2 node4 node2 Capacitor]\n [RP node4 node3 Resistor]\n [RP2 node4 node2 Resistor]\n [C1 node4 node3 Capacitor]\n [VDD node4 0]\n  </answer>"
+  },
+  {
+    "id": "020",
+    "image": "020.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1127,
+    "length": 873,
+    "answer": "<think>\n <step1>\n VBAT(Port)[[38, 107, 1071, 130]]\n GND(Port)[[527, 664, 585, 702], [528, 835, 585, 870]]\n VIN+(Port)[[276, 440, 309, 473]]\n VIN-(Port)[[823, 439, 855, 473]]\n VOUT(Port)[[1089, 443, 1122, 477]]\n </step1>\n <step2>\n Ibias(CurrentSource)[[512, 569, 598, 649]]\n M8(PMOS)[[972, 159, 1052, 243]]\n M7(PMOS)[[57, 158, 139, 242]]\n M4(PMOS)[[636, 158, 716, 239]]\n M2(NMOS)[[702, 414, 783, 499]]\n M9(NMOS)[[55, 687, 138, 774]]\n M3(PMOS)[[407, 159, 485, 241]]\n M1(NMOS)[[340, 414, 420, 498]]\n M5(PMOS)[[255, 159, 335, 243]]\n M10(NMOS)[[971, 685, 1053, 772]]\n M6(PMOS)[[778, 158, 858, 242]]\n </step2>\n <step3>\n node1: [Ibias.+, M9.S, M10.S, GND]\n node2: [Ibias.-, M2.S, M1.S]\n node3: [M8.G, M6.G]\n node4: [M8.D, M10.D, VOUT]\n node5: [M8.S, M7.S, M4.S, M3.S, M5.S, M6.S, VBAT]\n node6: [M7.G, M5.G, M5.D]\n node7: [M7.D, M9.G, M9.D, M10.G]\n node8: [M4.G, M3.D, M1.D]\n node9: [M4.D, M2.D, M3.G, M6.D]\n node10: [M2.G, VIN-]\n node11: [VIN+, M1.G]\n </step3>\n </think>\n\n <answer>\n [VIN- node10 0]\n [GND node1 0]\n [VOUT node4 0]\n [VBAT node5 0]\n [VIN+ node11 0]\n [Ibias node1 node2 CurrentSource]\n [M8 node3 node4 node5 PMOS]\n [M7 node6 node7 node5 PMOS]\n [M4 node8 node9 node5 PMOS]\n [M2 node10 node9 node2 NMOS]\n [M9 node7 node7 node1 NMOS]\n [M3 node9 node8 node5 PMOS]\n [M1 node11 node8 node2 NMOS]\n [M5 node6 node6 node5 PMOS]\n [M10 node7 node4 node1 NMOS]\n [M6 node3 node9 node5 PMOS]\n  </answer>"
+  },
+  {
+    "id": "021",
+    "image": "021.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1198,
+    "length": 612,
+    "answer": "<think>\n <step1>\n VDD(Port)[[205, 50, 1038, 71]]\n GND(Port)[[244, 520, 288, 565], [397, 520, 438, 567], [489, 521, 531, 564], [705, 521, 746, 564], [794, 521, 836, 564], [946, 520, 990, 564]]\n +(Port)[[132, 441, 154, 465]]\n -(Port)[[1081, 442, 1102, 465]]\n </step1>\n <step2>\n M6(NMOS)[[963, 416, 1032, 491]]\n M5(NMOS)[[201, 416, 270, 491]]\n M3(NMOS)[[810, 416, 881, 491]]\n M1(NMOS)[[354, 416, 423, 492]]\n M7(PMOS)[[232, 112, 300, 187]]\n M2(PMOS)[[356, 112, 424, 188]]\n M3(PMOS)[[812, 112, 879, 188]]\n M8(PMOS)[[936, 111, 1006, 187]]\n CL(Capacitor)[[697, 440, 751, 474]]\n CL2(Capacitor)[[484, 440, 536, 475]]\n </step2>\n <step3>\n node1: [M6.G, -]\n node2: [M6.D, M7.D]\n node3: [M6.S, M5.S, M3.S, M1.S, GND, CL, CL2]\n node4: [M5.G, M1.G, +]\n node5: [M5.D, M8.D]\n node6: [M3.G, M8.G]\n node7: [M3.D, CL]\n node8: [M1.D, M2.D, CL2]\n node9: [M7.G, M2.G]\n node10: [M7.S, M2.S, M8.S, VDD]\n </step3>\n </think>\n\n <answer>\n [M6 node1 node2 node3 NMOS]\n [M5 node4 node5 node3 NMOS]\n [M3 node6 node7 node3 NMOS]\n [M1 node4 node8 node3 NMOS]\n [M7 node9 node2 node10 PMOS]\n [M2 node9 node8 node10 PMOS]\n [M8 node6 node5 node10 PMOS]\n [+ node4 0]\n [GND node3 0]\n [CL node7 node3 Capacitor]\n [CL2 node8 node3 Capacitor]\n [- node1 0]\n [VDD node10 0]\n  </answer>"
+  },
+  {
+    "id": "022",
+    "image": "022.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 802,
+    "length": 426,
+    "answer": "<think>\n <step1>\n VDD(Port)[[180, 39, 615, 52]]\n GND(Port)[[100, 257, 126, 284], [187, 272, 213, 301], [393, 396, 419, 422], [583, 272, 609, 299], [671, 256, 696, 282]]\n Vout1(Port)[[71, 160, 84, 172]]\n +(Port)[[253, 265, 265, 279]]\n -(Port)[[253, 316, 267, 330]]\n Vout2(Port)[[713, 160, 725, 172]]\n </step1>\n <step2>\n M3(PMOS)[[326, 91, 366, 136]]\n M5(PMOS)[[198, 93, 236, 136]]\n M4(PMOS)[[446, 93, 486, 136]]\n M6(PMOS)[[560, 93, 599, 136]]\n RD2(Resistor)[[582, 204, 611, 236]]\n RD1(Resistor)[[186, 204, 216, 236]]\n CL1(Capacitor)[[98, 211, 128, 230]]\n CL2(Capacitor)[[668, 211, 699, 230]]\n M2(NMOS)[[479, 249, 522, 294]]\n M1(NMOS)[[292, 250, 334, 295]]\n ISS(CurrentSource)[[385, 335, 427, 375]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M5.S, M4.S, M6.S]\n node2: [M3.G, M3.D, M5.G, M1.D]\n node3: [M5.D, Vout1, RD1, CL1]\n node4: [M4.G, M4.D, M6.G, M2.D]\n node5: [M6.D, Vout2, RD2, CL2]\n node6: [RD2, RD1, CL1, CL2, GND, ISS.+]\n node7: [M2.G, -]\n node8: [M2.S, M1.S, ISS.-]\n node9: [M1.G, +]\n </step3>\n </think>\n\n <answer>\n [+ node9 0]\n [- node7 0]\n [VDD node1 0]\n [GND node6 0]\n [Vout2 node5 0]\n [Vout1 node3 0]\n [RD2 node5 node6 Resistor]\n [RD1 node3 node6 Resistor]\n [M3 node2 node2 node1 PMOS]\n [M5 node2 node3 node1 PMOS]\n [M4 node4 node4 node1 PMOS]\n [M6 node4 node5 node1 PMOS]\n [CL1 node3 node6 Capacitor]\n [CL2 node5 node6 Capacitor]\n [M2 node7 node4 node8 NMOS]\n [M1 node9 node2 node8 NMOS]\n [ISS node6 node8 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "023",
+    "image": "023.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 636,
+    "length": 500,
+    "answer": "<think>\n <step1>\n VDD(Port)[[33, 38, 547, 58]]\n GND(Port)[[44, 355, 77, 388], [284, 442, 319, 476], [417, 355, 450, 389], [505, 421, 538, 454]]\n </step1>\n <step2>\n M3(PMOS)[[255, 86, 306, 139]]\n M4(PMOS)[[56, 85, 107, 140]]\n M1(NMOS)[[56, 279, 107, 338]]\n Rb(Resistor)[[503, 223, 541, 266]]\n M6(NMOS)[[516, 347, 567, 403]]\n M5(NMOS)[[429, 281, 481, 339]]\n M2(NMOS)[[254, 279, 306, 337]]\n RS(Resistor)[[282, 377, 321, 419]]\n Ra(Resistor)[[503, 92, 540, 135]]\n </step2>\n <step3>\n node1: [M3.G, M3.S, M4.G, M4.S, Ra, VDD]\n node2: [M3.D, M5.D, M2.D]\n node3: [GND, M1.S, M6.S, M5.S, RS]\n node4: [M4.D, M1.G, M1.D, M2.G]\n node5: [Rb, M6.G, Ra]\n node6: [Rb, M6.D, M5.G]\n node7: [M2.S, RS]\n </step3>\n </think>\n\n <answer>\n [M3 node1 node2 node1 PMOS]\n [GND node3 0]\n [M4 node1 node4 node1 PMOS]\n [M1 node4 node4 node3 NMOS]\n [Rb node5 node6 Resistor]\n [M6 node5 node6 node3 NMOS]\n [M5 node6 node2 node3 NMOS]\n [M2 node4 node2 node7 NMOS]\n [RS node7 node3 Resistor]\n [Ra node1 node5 Resistor]\n [VDD node1 0]\n  </answer>"
+  },
+  {
+    "id": "024",
+    "image": "024.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 762,
+    "length": 740,
+    "answer": "<think>\n <step1>\n VDD(Port)[[222, 49, 641, 69]]\n GND(Port)[[140, 636, 185, 679], [236, 604, 281, 649], [459, 667, 504, 712], [587, 604, 631, 649]]\n Vin(Port)[[86, 429, 110, 451]]\n Vout(Port)[[343, 235, 364, 258]]\n Vb(Port)[[373, 333, 398, 356]]\n </step1>\n <step2>\n I1(CurrentSource)[[574, 107, 645, 181]]\n RD(Resistor)[[234, 123, 282, 182]]\n M1(NMOS)[[251, 303, 327, 385]]\n M2(NMOS)[[252, 495, 326, 576]]\n M0(NMOS)[[542, 496, 616, 575]]\n Iin(VoltageSource)[[126, 519, 200, 591]]\n C0(Capacitor)[[455, 586, 508, 620]]\n </step2>\n <step3>\n node1: [VDD, I1.-, RD]\n node2: [I1.+, M2.G, M0.G, M0.D, C0]\n node3: [RD, Vout, M1.D]\n node4: [M1.G, Vb]\n node5: [M1.S, Vin, M2.D, Iin.-]\n node6: [M2.S, M0.S, Iin.+, C0, GND]\n </step3>\n </think>\n\n <answer>\n [Vb node4 0]\n [VDD node1 0]\n [Vin node5 0]\n [GND node6 0]\n [Vout node3 0]\n [RD node1 node3 Resistor]\n [C0 node2 node6 Capacitor]\n [M1 node4 node3 node5 NMOS]\n [M2 node2 node5 node6 NMOS]\n [M0 node2 node2 node6 NMOS]\n [I1 node2 node1 CurrentSource]\n [Iin node6 node5 VoltageSource]\n  </answer>"
+  },
+  {
+    "id": "025",
+    "image": "025.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 958,
+    "length": 478,
+    "answer": "<think>\n <step1>\n VDD(Port)[[133, 69, 845, 83]]\n GND(Port)[[139, 435, 169, 464], [455, 434, 486, 465], [655, 404, 685, 436], [813, 403, 843, 435]]\n Vin1(Port)[[66, 266, 82, 282]]\n Vin2(Port)[[543, 267, 558, 282]]\n Vout1(Port)[[701, 307, 716, 321]]\n Vout2(Port)[[780, 307, 796, 321]]\n </step1>\n <step2>\n I3(CurrentSource)[[130, 105, 177, 151]]\n I4(CurrentSource)[[447, 107, 495, 152]]\n M3(PMOS)[[210, 169, 257, 220]]\n M6(PMOS)[[825, 169, 869, 219]]\n M4(PMOS)[[369, 169, 415, 220]]\n M5(PMOS)[[629, 170, 673, 219]]\n M1(NMOS)[[111, 248, 157, 300]]\n M2(NMOS)[[467, 250, 514, 298]]\n RS(Resistor)[[288, 317, 326, 349]]\n RD2(Resistor)[[811, 355, 845, 392]]\n RD1(Resistor)[[657, 357, 686, 393]]\n I1(CurrentSource)[[130, 372, 178, 418]]\n I2(CurrentSource)[[447, 373, 495, 418]]\n </step2>\n <step3>\n node1: [VDD, I3.-, I4.-, M3.S, M6.S, M4.S, M5.S]\n node2: [I3.+, M3.G, M6.G, M1.D]\n node3: [I4.+, M4.G, M5.G, M2.D]\n node4: [M3.D, M1.S, RS, I1.-]\n node5: [M6.D, Vout2, RD2]\n node6: [M4.D, M2.S, RS, I2.-]\n node7: [M5.D, Vout1, RD1]\n node8: [M1.G, Vin1]\n node9: [M2.G, Vin2]\n node10: [RD2, RD1, I1.+, I2.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [Vin1 node8 0]\n [Vin2 node9 0]\n [GND node10 0]\n [Vout2 node5 0]\n [Vout1 node7 0]\n [RS node4 node6 Resistor]\n [M3 node2 node4 node1 PMOS]\n [M6 node2 node5 node1 PMOS]\n [M4 node3 node6 node1 PMOS]\n [M5 node3 node7 node1 PMOS]\n [M1 node8 node2 node4 NMOS]\n [M2 node9 node3 node6 NMOS]\n [RD2 node5 node10 Resistor]\n [RD1 node7 node10 Resistor]\n [I3 node2 node1 CurrentSource]\n [I4 node3 node1 CurrentSource]\n [I1 node10 node4 CurrentSource]\n [I2 node10 node6 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "026",
+    "image": "026.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 440,
+    "length": 532,
+    "answer": "<think>\n <step1>\n VDD(Port)[[154, 46, 203, 63]]\n GND(Port)[[162, 493, 195, 526]]\n Vb(Port)[[82, 329, 99, 345]]\n Vout(Port)[[345, 239, 360, 256]]\n </step1>\n <step2>\n LP(Inductor)[[90, 139, 134, 208]]\n RP(Resistor)[[159, 157, 198, 197]]\n CP(Capacitor)[[268, 164, 306, 190]]\n M1(NMOS)[[129, 309, 183, 365]]\n C2(Capacitor)[[268, 319, 305, 343]]\n Ib(CurrentSource)[[153, 416, 204, 467]]\n </step2>\n <step3>\n node1: [VDD, LP, RP, CP]\n node2: [LP, RP, CP, Vout, M1.D, C2]\n node3: [M1.G, Vb]\n node4: [M1.S, C2, Ib.-]\n node5: [Ib.+, GND]\n </step3>\n </think>\n\n <answer>\n [Vb node3 0]\n [VDD node1 0]\n [GND node5 0]\n [Vout node2 0]\n [LP node1 node2 Inductor]\n [RP node1 node2 Resistor]\n [CP node1 node2 Capacitor]\n [C2 node2 node4 Capacitor]\n [M1 node3 node2 node4 NMOS]\n [Ib node5 node4 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "027",
+    "image": "027.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1036,
+    "length": 484,
+    "answer": "<think>\n <step1>\n VDD(Port)[[178, 43, 875, 60]]\n GND(Port)[[85, 423, 123, 463], [191, 422, 231, 463], [821, 422, 860, 463], [927, 422, 967, 463]]\n </step1>\n <step2>\n L2(Inductor)[[574, 182, 655, 235]]\n I2(CurrentSource)[[812, 341, 872, 401]]\n M1(NMOS)[[205, 174, 266, 242]]\n L1(Inductor)[[395, 182, 478, 235]]\n I1(CurrentSource)[[179, 340, 241, 401]]\n M2(NMOS)[[784, 175, 847, 242]]\n C3(Capacitor)[[81, 354, 129, 385]]\n C4(Capacitor)[[922, 355, 968, 384]]\n C1(Capacitor)[[271, 292, 302, 339]]\n C2(Capacitor)[[750, 293, 781, 340]]\n R1(Resistor)[[502, 81, 549, 130]]\n </step2>\n <step3>\n node1: [L2, L1, R1]\n node2: [L2, M2.G, C2]\n node3: [I2.+, I1.+, GND, C3, C4]\n node4: [M1.G, L1, C1]\n node5: [M1.D, M2.D, R1, VDD]\n node6: [M1.S, I1.-, C3, C1]\n node7: [M2.S, I2.-, C4, C2]\n </step3>\n </think>\n\n <answer>\n [L2 node1 node2 Inductor]\n [I2 node3 node7 CurrentSource]\n [M1 node4 node5 node6 NMOS]\n [L1 node1 node4 Inductor]\n [I1 node3 node6 CurrentSource]\n [M2 node2 node5 node7 NMOS]\n [GND node3 0]\n [C3 node6 node3 Capacitor]\n [C4 node3 node7 Capacitor]\n [C1 node4 node6 Capacitor]\n [C2 node2 node7 Capacitor]\n [R1 node5 node1 Resistor]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "028",
+    "image": "028.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 868,
+    "length": 588,
+    "answer": "<think>\n <step1>\n VDD(Port)[[366, 58, 637, 73]]\n GND(Port)[[109, 528, 140, 562], [219, 186, 250, 219], [372, 460, 407, 494], [593, 462, 625, 496]]\n Vout(Port)[[733, 341, 750, 358]]\n </step1>\n <step2>\n I1(CurrentSource)[[363, 98, 415, 148]]\n RB(Resistor)[[502, 131, 540, 174]]\n C2(Capacitor)[[305, 153, 328, 193]]\n M4(PMOS)[[342, 213, 393, 266]]\n M3(NMOS)[[561, 233, 613, 289]]\n C1(Capacitor)[[459, 307, 484, 347]]\n RF(Resistor)[[283, 309, 323, 346]]\n M2(NMOS)[[560, 387, 614, 444]]\n M1(NMOS)[[341, 389, 393, 445]]\n RS(Resistor)[[174, 399, 212, 435]]\n Vin(VoltageSource)[[99, 459, 150, 510]]\n </step2>\n <step3>\n node1: [VDD, I1.-, RB, M3.D]\n node2: [I1.+, C2, M4.S]\n node3: [RB, M3.G, C1]\n node4: [C2, GND, M2.S, M1.S, Vin.-]\n node5: [M4.G, RF, M2.G, M1.G, RS]\n node6: [M4.D, C1, RF, M1.D]\n node7: [M3.S, Vout, M2.D]\n node8: [RS, Vin.+]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node4 0]\n [Vout node7 0]\n [RB node1 node3 Resistor]\n [RF node5 node6 Resistor]\n [RS node8 node5 Resistor]\n [C2 node4 node2 Capacitor]\n [C1 node6 node3 Capacitor]\n [M4 node5 node6 node2 PMOS]\n [M3 node3 node1 node7 NMOS]\n [M2 node5 node7 node4 NMOS]\n [M1 node5 node6 node4 NMOS]\n [I1 node2 node1 CurrentSource]\n [Vin node8 node4 VoltageSource]\n  </answer>"
+  },
+  {
+    "id": "029",
+    "image": "029.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 904,
+    "length": 862,
+    "answer": "<think>\n <step1>\n VDD(Port)[[634, 94, 710, 119]]\n GND(Port)[[150, 803, 197, 853], [416, 288, 463, 338], [646, 704, 696, 753]]\n Vout(Port)[[758, 522, 783, 547]]\n </step1>\n <step2>\n I1(CurrentSource)[[633, 156, 710, 231]]\n C1(Capacitor)[[544, 240, 581, 297]]\n M2(PMOS)[[602, 328, 677, 409]]\n RF(Resistor)[[513, 506, 574, 563]]\n M1(NMOS)[[601, 592, 679, 674]]\n CS(Capacitor)[[345, 604, 382, 662]]\n RS(Resistor)[[249, 607, 306, 662]]\n Vin(VoltageSource)[[136, 698, 213, 775]]\n </step2>\n <step3>\n node1: [VDD, I1.-]\n node2: [I1.+, C1, M2.S]\n node3: [C1, GND, M1.S, Vin.-]\n node4: [M2.G, RF, M1.G, CS]\n node5: [M2.D, RF, Vout, M1.D]\n node6: [CS, RS]\n node7: [RS, Vin.+]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node3 0]\n [Vout node5 0]\n [RF node4 node5 Resistor]\n [RS node7 node6 Resistor]\n [C1 node3 node2 Capacitor]\n [CS node6 node4 Capacitor]\n [M2 node4 node5 node2 PMOS]\n [M1 node4 node5 node3 NMOS]\n [I1 node2 node1 CurrentSource]\n [Vin node7 node3 VoltageSource]\n  </answer>"
+  },
+  {
+    "id": "030",
+    "image": "030.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 722,
+    "length": 650,
+    "answer": "<think>\n <step1>\n VDD(Port)[[180, 58, 449, 75]]\n GND(Port)[[136, 463, 174, 503], [294, 597, 333, 637], [376, 597, 414, 637], [507, 571, 546, 610]]\n </step1>\n <step2>\n L1(Inductor)[[183, 91, 235, 172]]\n L2(Inductor)[[396, 92, 448, 172]]\n M2(NMOS)[[366, 242, 426, 308]]\n M1(NMOS)[[205, 242, 264, 307]]\n LT(Inductor)[[289, 355, 342, 436]]\n CB(Capacitor)[[132, 396, 180, 426]]\n CT(Capacitor)[[503, 502, 550, 533]]\n ISS(CurrentSource)[[286, 503, 345, 563]]\n In(CurrentSource)[[363, 504, 425, 565]]\n </step2>\n <step3>\n node1: [VDD, L1, L2]\n node2: [L1, M2.G, M1.D]\n node3: [L2, M2.D, M1.G]\n node4: [M2.S, M1.S, LT, CB]\n node5: [LT, CT, ISS.-, In.-]\n node6: [CB, GND, CT, ISS.+, In.+]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node6 0]\n [L1 node1 node2 Inductor]\n [L2 node1 node3 Inductor]\n [LT node4 node5 Inductor]\n [CB node4 node6 Capacitor]\n [CT node5 node6 Capacitor]\n [M2 node2 node3 node4 NMOS]\n [M1 node3 node2 node4 NMOS]\n [In node6 node5 CurrentSource]\n [ISS node6 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "031",
+    "image": "031.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 722,
+    "length": 650,
+    "answer": "<think>\n <step1>\n VDD(Port)[[182, 58, 449, 75]]\n GND(Port)[[136, 463, 174, 503], [294, 597, 333, 637], [376, 597, 414, 637], [507, 571, 546, 610]]\n </step1>\n <step2>\n L1(Inductor)[[183, 91, 235, 172]]\n L2(Inductor)[[396, 92, 448, 172]]\n M2(NMOS)[[366, 242, 426, 308]]\n M1(NMOS)[[205, 242, 264, 307]]\n LT(Inductor)[[289, 355, 342, 436]]\n CB(Capacitor)[[132, 396, 180, 426]]\n CT(Capacitor)[[503, 502, 550, 533]]\n ISS(CurrentSource)[[286, 503, 345, 563]]\n In(CurrentSource)[[363, 504, 425, 565]]\n </step2>\n <step3>\n node1: [VDD, L1, L2]\n node2: [L1, M2.G, M1.D]\n node3: [L2, M2.D, M1.G]\n node4: [M2.S, M1.S, LT, CB]\n node5: [LT, CT, ISS.-, In.-]\n node6: [CB, GND, CT, ISS.+, In.+]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node6 0]\n [L1 node1 node2 Inductor]\n [L2 node1 node3 Inductor]\n [LT node4 node5 Inductor]\n [CB node4 node6 Capacitor]\n [CT node5 node6 Capacitor]\n [M2 node2 node3 node4 NMOS]\n [M1 node3 node2 node4 NMOS]\n [In node6 node5 CurrentSource]\n [ISS node6 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "032",
+    "image": "032.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 798,
+    "length": 676,
+    "answer": "<think>\n <step1>\n VDD(Port)[[60, 74, 666, 93]]\n GND(Port)[[344, 635, 384, 673]]\n +(Port)[[107, 400, 127, 420]]\n -(Port)[[107, 483, 127, 504]]\n out1(Port)[[299, 318, 319, 338]]\n out2(Port)[[410, 318, 430, 338]]\n </step1>\n <step2>\n M6(PMOS)[[553, 129, 614, 198]]\n M4(PMOS)[[444, 131, 505, 199]]\n M5(PMOS)[[114, 131, 176, 199]]\n M3(PMOS)[[222, 131, 285, 199]]\n M2(NMOS)[[496, 376, 560, 446]]\n M1(NMOS)[[169, 378, 233, 444]]\n ISS(CurrentSource)[[333, 538, 395, 600]]\n </step2>\n <step3>\n node1: [VDD, M6.S, M4.S, M5.S, M3.S]\n node2: [M6.G, M6.D, M4.D, M3.G, out2, M2.D]\n node3: [M4.G, M5.G, M5.D, M3.D, out1, M1.D]\n node4: [M2.G, -]\n node5: [M2.S, M1.S, ISS.-]\n node6: [M1.G, +]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [+ node6 0]\n [- node4 0]\n [VDD node1 0]\n [GND node7 0]\n [out2 node2 0]\n [out1 node3 0]\n [M6 node2 node2 node1 PMOS]\n [M4 node3 node2 node1 PMOS]\n [M5 node3 node3 node1 PMOS]\n [M3 node2 node3 node1 PMOS]\n [M2 node4 node2 node5 NMOS]\n [M1 node6 node3 node5 NMOS]\n [ISS node7 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "033",
+    "image": "033.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 860,
+    "length": 710,
+    "answer": "<think>\n <step1>\n VDD(Port)[[471, 59, 530, 83]]\n GND(Port)[[480, 648, 518, 691]]\n Vcont(Port)[[121, 506, 141, 526]]\n </step1>\n <step2>\n R1(Resistor)[[478, 99, 523, 148]]\n L1(Inductor)[[368, 225, 423, 307]]\n L2(Inductor)[[578, 226, 632, 306]]\n M1(NMOS)[[391, 378, 450, 442]]\n M2(NMOS)[[550, 378, 610, 442]]\n M3(PMOS)[[203, 406, 269, 468]]\n M4(PMOS)[[729, 406, 796, 468]]\n ISS(CurrentSource)[[468, 558, 530, 617]]\n </step2>\n <step3>\n node1: [VDD, R1]\n node2: [R1, L1, L2]\n node3: [L1, M1.D, M2.G, M3.G]\n node4: [L2, M1.G, M2.D, M4.G]\n node5: [M1.S, M2.S, ISS.-]\n node6: [M3.D, M3.S, M4.D, M4.S, Vcont]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node7 0]\n [Vcont node6 0]\n [R1 node1 node2 Resistor]\n [L1 node2 node3 Inductor]\n [L2 node2 node4 Inductor]\n [M1 node4 node3 node5 NMOS]\n [M2 node3 node4 node5 NMOS]\n [M3 node3 node6 node6 PMOS]\n [M4 node4 node6 node6 PMOS]\n [ISS node7 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "034",
+    "image": "034.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1586,
+    "length": 678,
+    "answer": "<think>\n <step1>\n VDD(Port)[[228, 52, 1356, 75]]\n GND(Port)[[233, 552, 277, 598], [418, 430, 460, 476], [692, 613, 734, 660], [845, 613, 887, 660], [1119, 429, 1162, 477], [1300, 552, 1345, 600]]\n Vout1(Port)[[151, 320, 176, 344]]\n 1(Port)[[580, 262, 603, 283]]\n Vb(Port)[[580, 537, 603, 559]]\n 2(Port)[[581, 323, 602, 343]]\n Vout2(Port)[[1404, 321, 1427, 346]]\n </step1>\n <step2>\n Iin(CurrentSource)[[756, 110, 826, 177]]\n M7(PMOS)[[250, 145, 318, 221]]\n M8(PMOS)[[1261, 146, 1330, 220]]\n M11(PMOS)[[375, 146, 444, 220]]\n M12(PMOS)[[1136, 146, 1204, 220]]\n M2(PMOS)[[864, 238, 930, 312]]\n M1(PMOS)[[649, 239, 716, 311]]\n M9(NMOS)[[434, 329, 502, 404]]\n M10(NMOS)[[1078, 329, 1145, 404]]\n M6(NMOS)[[1259, 450, 1331, 525]]\n M5(NMOS)[[250, 451, 321, 526]]\n M3(NMOS)[[651, 513, 717, 585]]\n M4(NMOS)[[802, 513, 868, 587]]\n </step2>\n <step3>\n node1: [VDD, Iin.-, M7.S, M8.S, M11.S, M12.S]\n node2: [Iin.+, M2.S, M1.S]\n node3: [M7.G, M11.G, M11.D, M9.D]\n node4: [M7.D, Vout1, M5.D]\n node5: [M8.G, M12.G, M12.D, M10.D]\n node6: [M8.D, Vout2, M6.D]\n node7: [M2.G, 2]\n node8: [M2.D, M9.G, M6.G, M4.D]\n node9: [M1.G, 1]\n node10: [M1.D, M10.G, M5.G, M3.D]\n node11: [M9.S, M10.S, GND, M6.S, M5.S, M3.S, M4.S]\n node12: [M3.G, M4.G, Vb]\n </step3>\n </think>\n\n <answer>\n [1 node9 0]\n [2 node7 0]\n [VDD node1 0]\n [Vb node12 0]\n [GND node11 0]\n [Vout1 node4 0]\n [Vout2 node6 0]\n [M7 node3 node4 node1 PMOS]\n [M8 node5 node6 node1 PMOS]\n [M2 node7 node8 node2 PMOS]\n [M11 node3 node3 node1 PMOS]\n [M12 node5 node5 node1 PMOS]\n [M1 node9 node10 node2 PMOS]\n [M9 node8 node3 node11 NMOS]\n [M6 node8 node6 node11 NMOS]\n [M5 node10 node4 node11 NMOS]\n [M4 node12 node8 node11 NMOS]\n [M10 node10 node5 node11 NMOS]\n [M3 node12 node10 node11 NMOS]\n [Iin node2 node1 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "035",
+    "image": "035.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 926,
+    "length": 740,
+    "answer": "<think>\n <step1>\n VDD(Port)[[173, 52, 792, 74]]\n GND(Port)[[62, 432, 103, 476], [183, 674, 227, 721], [306, 462, 349, 506], [581, 491, 622, 536], [733, 402, 776, 445]]\n VF(Port)[[408, 324, 431, 346]]\n </step1>\n <step2>\n Vt(VoltageSource)[[565, 394, 638, 466]]\n R1(Resistor)[[275, 526, 330, 573]]\n CGS2(Capacitor)[[302, 383, 354, 416]]\n M2(NMOS)[[690, 298, 761, 374]]\n M1(NMOS)[[142, 361, 212, 435]]\n RD1(Resistor)[[180, 187, 230, 246]]\n RD2(Resistor)[[731, 126, 780, 183]]\n R2(Resistor)[[182, 584, 228, 640]]\n </step2>\n <step3>\n node1: [Vt.+, M2.G]\n node2: [Vt.-, GND, CGS2, M2.S, M1.G, R2]\n node3: [R1, M1.S, R2]\n node4: [R1, M2.D, RD2]\n node5: [CGS2, M1.D, RD1, VF]\n node6: [RD1, RD2, VDD]\n </step3>\n </think>\n\n <answer>\n [Vt node1 node2 VoltageSource]\n [GND node2 0]\n [R1 node3 node4 Resistor]\n [CGS2 node5 node2 Capacitor]\n [M2 node1 node4 node2 NMOS]\n [M1 node2 node5 node3 NMOS]\n [RD1 node5 node6 Resistor]\n [RD2 node6 node4 Resistor]\n [R2 node3 node2 Resistor]\n [VF node5 0]\n [VDD node6 0]\n  </answer>"
+  },
+  {
+    "id": "036",
+    "image": "036.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 828,
+    "length": 552,
+    "answer": "<think>\n <step1>\n VDD(Port)[[323, 66, 598, 83]]\n GND(Port)[[441, 471, 479, 511]]\n Vcont(Port)[[133, 511, 152, 531]]\n </step1>\n <step2>\n M3(PMOS)[[352, 91, 409, 156]]\n M4(PMOS)[[511, 92, 571, 158]]\n L2(Inductor)[[540, 227, 593, 313]]\n L1(Inductor)[[329, 228, 382, 313]]\n IS(CurrentSource)[[429, 388, 491, 449]]\n Mv1(PMOS)[[190, 412, 254, 474]]\n Mv2(NMOS)[[664, 413, 729, 475]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M4.D, L2, Mv2.G]\n node3: [M3.D, M4.G, L1, Mv1.G]\n node4: [L2, L1, IS.-]\n node5: [IS.+, GND]\n node6: [Mv1.D, Mv1.S, Mv2.D, Mv2.S, Vcont]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node5 0]\n [Vcont node6 0]\n [L2 node2 node4 Inductor]\n [L1 node3 node4 Inductor]\n [M3 node2 node3 node1 PMOS]\n [M4 node3 node2 node1 PMOS]\n [Mv1 node3 node6 node6 PMOS]\n [Mv2 node2 node6 node6 NMOS]\n [IS node5 node4 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "037",
+    "image": "037.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1194,
+    "length": 542,
+    "answer": "<think>\n <step1>\n VDD(Port)[[126, 102, 1029, 117]]\n GND(Port)[[212, 483, 244, 516], [563, 483, 595, 515], [913, 483, 946, 516]]\n </step1>\n <step2>\n R2(Resistor)[[287, 153, 324, 193]]\n R6(Resistor)[[988, 153, 1025, 193]]\n R5(Resistor)[[836, 153, 872, 193]]\n R1(Resistor)[[134, 154, 170, 193]]\n R3(Resistor)[[483, 155, 522, 194]]\n R4(Resistor)[[637, 155, 674, 194]]\n M3(NMOS)[[456, 300, 506, 354]]\n M1(NMOS)[[105, 300, 157, 354]]\n M6(NMOS)[[1002, 300, 1053, 355]]\n M5(NMOS)[[808, 300, 859, 355]]\n M2(NMOS)[[301, 300, 351, 354]]\n M4(NMOS)[[650, 300, 703, 354]]\n IS3(CurrentSource)[[904, 405, 955, 456]]\n IS1(CurrentSource)[[201, 405, 253, 456]]\n IS2(CurrentSource)[[553, 405, 605, 456]]\n </step2>\n <step3>\n node1: [VDD, R2, R6, R5, R1, R3, R4]\n node2: [R2, M3.G, M2.D]\n node3: [R6, M6.D, M2.G]\n node4: [R5, M1.G, M5.D]\n node5: [R1, M1.D, M4.G]\n node6: [R3, M3.D, M6.G]\n node7: [R4, M5.G, M4.D]\n node8: [M3.S, M4.S, IS2.-]\n node9: [M1.S, M2.S, IS1.-]\n node10: [M6.S, M5.S, IS3.-]\n node11: [IS3.+, IS1.+, IS2.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node11 0]\n [R2 node1 node2 Resistor]\n [R6 node1 node3 Resistor]\n [R5 node1 node4 Resistor]\n [R1 node1 node5 Resistor]\n [R3 node1 node6 Resistor]\n [R4 node1 node7 Resistor]\n [M3 node2 node6 node8 NMOS]\n [M1 node4 node5 node9 NMOS]\n [M2 node3 node2 node9 NMOS]\n [M4 node5 node7 node8 NMOS]\n [M6 node6 node3 node10 NMOS]\n [M5 node7 node4 node10 NMOS]\n [IS1 node11 node9 CurrentSource]\n [IS2 node11 node8 CurrentSource]\n [IS3 node11 node10 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "038",
+    "image": "038.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 542,
+    "length": 424,
+    "answer": "<think>\n <step1>\n VDD(Port)[[75, 28, 462, 40]]\n GND(Port)[[81, 198, 107, 229], [136, 182, 162, 208], [152, 365, 181, 393], [209, 347, 236, 374], [338, 383, 364, 411], [412, 347, 437, 374]]\n Vin(Port)[[68, 247, 82, 261]]\n Vout(Port)[[271, 117, 285, 131]]\n Vb(Port)[[289, 172, 303, 186]]\n </step1>\n <step2>\n C1(Capacitor)[[334, 336, 368, 357]]\n I1(CurrentSource)[[403, 118, 446, 159]]\n M4(PMOS)[[91, 46, 132, 92]]\n C2(Capacitor)[[133, 134, 164, 155]]\n M2(NMOS)[[217, 286, 261, 333]]\n I2(CurrentSource)[[74, 135, 116, 178]]\n M1(NMOS)[[218, 155, 262, 202]]\n I2(CurrentSource)[[146, 298, 189, 341]]\n M3(PMOS)[[185, 46, 227, 92]]\n M0(NMOS)[[386, 286, 430, 333]]\n </step2>\n <step3>\n node1: [GND, C1, C2, M2.S, I2.+, M0.S]\n node2: [C1, I1.+, M2.G, M0.G, M0.D]\n node3: [I1.-, M4.S, M3.S, VDD]\n node4: [M4.G, C2, M3.G]\n node5: [M4.D, M2.D, I2.-, M1.S, Vin]\n node6: [M1.G, Vb]\n node7: [M1.D, M3.D, Vout]\n </step3>\n </think>\n\n <answer>\n [GND node1 0]\n [C1 node2 node1 Capacitor]\n [I1 node2 node3 CurrentSource]\n [M4 node4 node5 node3 PMOS]\n [C2 node4 node1 Capacitor]\n [M2 node2 node5 node1 NMOS]\n [I2 node1 node5 CurrentSource]\n [M1 node6 node7 node5 NMOS]\n [M3 node4 node7 node3 PMOS]\n [M0 node2 node2 node1 NMOS]\n [Vin node5 0]\n [Vout node7 0]\n [Vb node6 0]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "039",
+    "image": "039.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1116,
+    "length": 720,
+    "answer": "<think>\n <step1>\n VDD(Port)[[111, 286, 183, 309], [844, 32, 915, 57]]\n GND(Port)[[313, 649, 359, 695], [856, 395, 902, 441]]\n VG(Port)[[566, 363, 588, 383]]\n Vout(Port)[[964, 185, 986, 212]]\n Vin(Port)[[547, 225, 569, 247]]\n </step1>\n <step2>\n M1(NMOS)[[812, 287, 888, 367]]\n IB(CurrentSource)[[206, 323, 279, 396]]\n MC(NMOS)[[332, 383, 405, 462]]\n MB(NMOS)[[332, 542, 405, 623]]\n MR(NMOS)[[617, 454, 693, 524]]\n RD(Resistor)[[854, 77, 905, 136]]\n CB(Capacitor)[[630, 299, 665, 357]]\n </step2>\n <step3>\n node1: [M1.G, MR.S, CB]\n node2: [M1.D, RD, Vout]\n node3: [M1.S, MB.S, GND]\n node4: [IB.+, MC.G, MC.D, MR.G, VG]\n node5: [IB.-, RD, VDD]\n node6: [MC.S, MB.G, MB.D, MR.D]\n node7: [CB, Vin]\n </step3>\n </think>\n\n <answer>\n [M1 node1 node2 node3 NMOS]\n [IB node4 node5 CurrentSource]\n [MC node4 node4 node6 NMOS]\n [MB node6 node6 node3 NMOS]\n [MR node4 node6 node1 NMOS]\n [GND node3 0]\n [RD node5 node2 Resistor]\n [VG node4 0]\n [CB node7 node1 Capacitor]\n [VDD node5 0]\n [Vout node2 0]\n [Vin node7 0]\n  </answer>"
+  },
+  {
+    "id": "040",
+    "image": "040.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1304,
+    "length": 966,
+    "answer": "<think>\n <step1>\n VDD(Port)[[425, 76, 864, 100]]\n GND(Port)[[370, 897, 417, 944], [432, 616, 476, 663], [526, 834, 571, 881], [715, 836, 758, 882], [808, 616, 853, 663], [868, 897, 915, 944]]\n Vin1(Port)[[101, 663, 123, 687]]\n Vb(Port)[[317, 384, 340, 406], [972, 663, 995, 686], [288, 665, 310, 686]]\n Vout1(Port)[[536, 259, 559, 281]]\n Vout2(Port)[[693, 259, 716, 282]]\n Vin2(Port)[[1160, 663, 1183, 687]]\n </step1>\n <step2>\n L1(Inductor)[[425, 139, 486, 233]]\n L2(Inductor)[[798, 139, 861, 235]]\n M3(NMOS)[[387, 358, 459, 433]]\n M4(NMOS)[[763, 358, 834, 434]]\n M1(NMOS)[[387, 510, 459, 590]]\n M2(NMOS)[[824, 511, 897, 591]]\n C2(Capacitor)[[1039, 523, 1072, 579]]\n C1(Capacitor)[[210, 525, 246, 579]]\n R2(Resistor)[[961, 588, 1010, 645]]\n R1(Resistor)[[275, 588, 323, 645]]\n M5(NMOS)[[483, 730, 554, 808]]\n M6(NMOS)[[730, 731, 802, 808]]\n C6(Capacitor)[[975, 741, 1013, 798]]\n C5(Capacitor)[[273, 742, 309, 797]]\n R5(Resistor)[[367, 805, 417, 861]]\n R6(Resistor)[[867, 805, 914, 861]]\n </step2>\n <step3>\n node1: [VDD, L1, L2]\n node2: [L1, Vout1, M3.D]\n node3: [L2, Vout2, M4.D]\n node4: [M3.G, M4.G, Vb, R2, R1]\n node5: [M3.S, M1.D, M5.D]\n node6: [M4.S, M2.D, M6.D]\n node7: [M1.G, C1, R1]\n node8: [M1.S, M2.S, GND, M5.S, M6.S, R5, R6]\n node9: [M2.G, C2, R2]\n node10: [C2, Vin2, C6]\n node11: [C1, Vin1, C5]\n node12: [M5.G, C5, R5]\n node13: [M6.G, C6, R6]\n </step3>\n </think>\n\n <answer>\n [Vb node4 0]\n [VDD node1 0]\n [GND node8 0]\n [Vout1 node2 0]\n [Vout2 node3 0]\n [Vin2 node10 0]\n [Vin1 node11 0]\n [L1 node1 node2 Inductor]\n [L2 node1 node3 Inductor]\n [R2 node9 node4 Resistor]\n [R1 node7 node4 Resistor]\n [R5 node12 node8 Resistor]\n [R6 node13 node8 Resistor]\n [M3 node4 node2 node5 NMOS]\n [M4 node4 node3 node6 NMOS]\n [M1 node7 node5 node8 NMOS]\n [M2 node9 node6 node8 NMOS]\n [C2 node9 node10 Capacitor]\n [C1 node11 node7 Capacitor]\n [M5 node12 node5 node8 NMOS]\n [M6 node13 node6 node8 NMOS]\n [C6 node13 node10 Capacitor]\n [C5 node11 node12 Capacitor]\n  </answer>"
+  },
+  {
+    "id": "041",
+    "image": "041.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 988,
+    "length": 868,
+    "answer": "<think>\n <step1>\n VDD(Port)[[556, 47, 792, 70]]\n GND(Port)[[98, 621, 147, 672], [331, 241, 379, 289], [565, 655, 612, 704], [730, 522, 778, 571]]\n Vout(Port)[[841, 305, 865, 329]]\n </step1>\n <step2>\n I1(CurrentSource)[[551, 108, 627, 183]]\n I2(CurrentSource)[[716, 175, 793, 249]]\n C1(Capacitor)[[460, 191, 499, 248]]\n M2(PMOS)[[519, 280, 594, 360]]\n M3(PMOS)[[683, 412, 759, 493]]\n C3(Capacitor)[[295, 423, 332, 480]]\n RF(Resistor)[[429, 424, 491, 478]]\n RS(Resistor)[[197, 425, 257, 479]]\n Vin(VoltageSource)[[83, 517, 164, 594]]\n M1(NMOS)[[518, 543, 594, 625]]\n C2(Capacitor)[[694, 787, 730, 845]]\n RM(Resistor)[[497, 790, 556, 843]]\n </step2>\n <step3>\n node1: [VDD, I1.-, I2.-]\n node2: [I1.+, C1, M2.S]\n node3: [I2.+, Vout, M3.S, C2]\n node4: [C1, GND, M3.D, Vin.-, M1.S]\n node5: [M2.G, C3, RF, M1.G, RM]\n node6: [M2.D, M3.G, RF, M1.D]\n node7: [C3, RS]\n node8: [RS, Vin.+]\n node9: [C2, RM]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node4 0]\n [Vout node3 0]\n [RF node5 node6 Resistor]\n [RS node8 node7 Resistor]\n [RM node5 node9 Resistor]\n [C1 node4 node2 Capacitor]\n [C3 node7 node5 Capacitor]\n [C2 node9 node3 Capacitor]\n [M2 node5 node6 node2 PMOS]\n [M3 node6 node4 node3 PMOS]\n [M1 node5 node6 node4 NMOS]\n [I1 node2 node1 CurrentSource]\n [I2 node3 node1 CurrentSource]\n [Vin node8 node4 VoltageSource]\n  </answer>"
+  },
+  {
+    "id": "042",
+    "image": "042.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1078,
+    "length": 728,
+    "answer": "<think>\n <step1>\n VDD(Port)[[204, 65, 770, 87]]\n GND(Port)[[331, 298, 373, 341], [374, 656, 419, 703], [709, 656, 753, 703], [832, 596, 877, 642]]\n Vout(Port)[[933, 428, 955, 451]]\n Vin(Port)[[110, 428, 133, 451]]\n </step1>\n <step2>\n M4(PMOS)[[485, 130, 553, 205]]\n I2(CurrentSource)[[698, 550, 768, 621]]\n M5(NMOS)[[667, 282, 737, 356]]\n M1(NMOS)[[179, 402, 250, 477]]\n M2(NMOS)[[542, 403, 614, 477]]\n M3(PMOS)[[239, 131, 307, 205]]\n C2(Capacitor)[[829, 520, 880, 552]]\n I1(CurrentSource)[[361, 550, 432, 621]]\n C1(Capacitor)[[433, 293, 465, 346]]\n </step2>\n <step3>\n node1: [M4.G, M1.D, M3.G, M3.D]\n node2: [M4.D, M5.G, M2.D, C1]\n node3: [M4.S, M5.D, M3.S, VDD]\n node4: [I2.+, GND, C2, I1.+, C1]\n node5: [I2.-, M5.S, M2.G, C2, Vout]\n node6: [M1.G, Vin]\n node7: [M1.S, M2.S, I1.-]\n </step3>\n </think>\n\n <answer>\n [M4 node1 node2 node3 PMOS]\n [I2 node4 node5 CurrentSource]\n [M5 node2 node3 node5 NMOS]\n [M1 node6 node1 node7 NMOS]\n [M2 node5 node2 node7 NMOS]\n [M3 node1 node1 node3 PMOS]\n [GND node4 0]\n [C2 node5 node4 Capacitor]\n [I1 node4 node7 CurrentSource]\n [Vout node5 0]\n [Vin node6 0]\n [C1 node4 node2 Capacitor]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "043",
+    "image": "043.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 906,
+    "length": 566,
+    "answer": "<think>\n <step1>\n VDD(Port)[[346, 35, 664, 56]]\n GND(Port)[[116, 352, 158, 397], [603, 474, 646, 520], [695, 474, 739, 519]]\n Vout(Port)[[767, 306, 789, 328]]\n </step1>\n <step2>\n M9(PMOS)[[563, 161, 630, 233]]\n Vin(VoltageSource)[[102, 256, 174, 327]]\n CL(Capacitor)[[692, 398, 743, 430]]\n CE(Capacitor)[[356, 89, 407, 124]]\n RS(Resistor)[[206, 170, 261, 219]]\n RL(Resistor)[[603, 384, 648, 438]]\n RZ(Resistor)[[420, 293, 472, 341]]\n CC(Capacitor)[[539, 290, 573, 344]]\n </step2>\n <step3>\n node1: [M9.G, CE, RS, RZ]\n node2: [M9.D, CL, RL, CC, Vout]\n node3: [M9.S, CE, VDD]\n node4: [GND, Vin.-, CL, RL]\n node5: [Vin.+, RS]\n node6: [RZ, CC]\n </step3>\n </think>\n\n <answer>\n [M9 node1 node2 node3 PMOS]\n [GND node4 0]\n [Vin node5 node4 VoltageSource]\n [CL node2 node4 Capacitor]\n [CE node3 node1 Capacitor]\n [RS node5 node1 Resistor]\n [RL node2 node4 Resistor]\n [RZ node1 node6 Resistor]\n [CC node6 node2 Capacitor]\n [Vout node2 0]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "044",
+    "image": "044.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 846,
+    "length": 738,
+    "answer": "<think>\n <step1>\n VDD(Port)[[339, 62, 736, 81]]\n GND(Port)[[192, 468, 233, 512], [345, 496, 386, 543], [619, 651, 661, 696]]\n Vout1(Port)[[141, 300, 164, 321]]\n Vin1(Port)[[385, 573, 407, 596]]\n </step1>\n <step2>\n R5(Resistor)[[616, 104, 664, 158]]\n C5(Capacitor)[[675, 115, 727, 148]]\n M5(PMOS)[[363, 183, 429, 256]]\n CGD(Capacitor)[[433, 285, 466, 338]]\n RD(Resistor)[[342, 376, 391, 434]]\n CL(Capacitor)[[188, 390, 241, 422]]\n M1(NMOS)[[577, 549, 647, 623]]\n RS(Resistor)[[464, 564, 519, 613]]\n </step2>\n <step3>\n node1: [VDD, R5, C5, M5.S]\n node2: [R5, C5, M5.G, CGD, M1.D]\n node3: [M5.D, CGD, Vout1, RD, CL]\n node4: [RD, CL, GND, M1.S]\n node5: [M1.G, RS]\n node6: [RS, Vin1]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node4 0]\n [Vin1 node6 0]\n [Vout1 node3 0]\n [R5 node1 node2 Resistor]\n [RD node3 node4 Resistor]\n [RS node6 node5 Resistor]\n [C5 node1 node2 Capacitor]\n [CL node3 node4 Capacitor]\n [M5 node2 node3 node1 PMOS]\n [CGD node3 node2 Capacitor]\n [M1 node5 node2 node4 NMOS]\n  </answer>"
+  },
+  {
+    "id": "045",
+    "image": "045.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 752,
+    "length": 718,
+    "answer": "<think>\n <step1>\n VDD(Port)[[138, 32, 637, 49]]\n GND(Port)[[149, 622, 193, 665], [577, 622, 620, 665]]\n V1(Port)[[38, 392, 60, 415]]\n V2(Port)[[709, 392, 731, 415]]\n </step1>\n <step2>\n M2(NMOS)[[592, 366, 664, 441]]\n M4(PMOS)[[440, 153, 510, 228]]\n I4(CurrentSource)[[562, 86, 633, 156]]\n M3(PMOS)[[258, 154, 328, 228]]\n M1(NMOS)[[105, 366, 180, 444]]\n I2(CurrentSource)[[563, 525, 634, 595]]\n I3(CurrentSource)[[137, 88, 205, 157]]\n RS(Resistor)[[361, 440, 416, 488]]\n I1(VoltageSource)[[136, 524, 207, 597]]\n </step2>\n <step3>\n node1: [M2.G, V2]\n node2: [M2.D, M4.G, I4.+]\n node3: [M2.S, M4.D, I2.-, RS]\n node4: [GND, I2.+, I1.+]\n node5: [M4.S, I4.-, M3.S, I3.-, VDD]\n node6: [M3.G, M1.D, I3.+]\n node7: [M3.D, M1.S, RS, I1.-]\n node8: [M1.G, V1]\n </step3>\n </think>\n\n <answer>\n [M2 node1 node2 node3 NMOS]\n [GND node4 0]\n [M4 node2 node3 node5 PMOS]\n [I4 node2 node5 CurrentSource]\n [M3 node6 node7 node5 PMOS]\n [M1 node8 node6 node7 NMOS]\n [I2 node4 node3 CurrentSource]\n [I3 node6 node5 CurrentSource]\n [RS node7 node3 Resistor]\n [V1 node8 0]\n [V2 node1 0]\n [I1 node4 node7 VoltageSource]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "046",
+    "image": "046.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 750,
+    "length": 642,
+    "answer": "<think>\n <step1>\n VDD(Port)[[169, 35, 667, 54]]\n GND(Port)[[290, 485, 324, 518], [598, 551, 628, 585]]\n Vin(Port)[[102, 321, 118, 338], [101, 387, 118, 404]]\n Vb(Port)[[496, 101, 513, 118]]\n </step1>\n <step2>\n M4(PMOS)[[413, 83, 463, 137]]\n M3(PMOS)[[195, 83, 244, 137]]\n M7(NMOS)[[633, 190, 682, 246]]\n M6(NMOS)[[546, 191, 595, 246]]\n C1(Capacitor)[[244, 199, 269, 238]]\n C2(Capacitor)[[353, 200, 379, 238]]\n M2(NMOS)[[413, 301, 463, 358]]\n M1(NMOS)[[151, 302, 201, 357]]\n M5(NMOS)[[303, 411, 354, 467]]\n S1(Switch)[[530, 428, 583, 449]]\n ID(CurrentSource)[[588, 473, 639, 525]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M3.S, M7.D, M6.D]\n node2: [M4.G, M3.G, Vb]\n node3: [M4.D, M6.G, C2, M2.D]\n node4: [M3.D, M7.G, C1, M1.D]\n node5: [M7.S, M6.S, S1, ID.-]\n node6: [C1, C2, M5.G, S1]\n node7: [M2.G, M1.G, Vin]\n node8: [M2.S, M1.S, M5.D]\n node9: [M5.S, ID.+, GND]\n </step3>\n </think>\n\n <answer>\n [Vb node2 0]\n [VDD node1 0]\n [Vin node7 0]\n [GND node9 0]\n [S1 node6 node5 Switch]\n [C1 node4 node6 Capacitor]\n [C2 node6 node3 Capacitor]\n [M4 node2 node3 node1 PMOS]\n [M3 node2 node4 node1 PMOS]\n [M7 node4 node1 node5 NMOS]\n [M6 node3 node1 node5 NMOS]\n [M2 node7 node3 node8 NMOS]\n [M1 node7 node4 node8 NMOS]\n [M5 node6 node8 node9 NMOS]\n [ID node9 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "047",
+    "image": "047.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 628,
+    "length": 614,
+    "answer": "<think>\n <step1>\n VDD(Port)[[132, 56, 485, 72]]\n GND(Port)[[68, 556, 101, 590], [138, 556, 169, 590], [245, 554, 276, 589], [315, 556, 346, 590]]\n out(Port)[[450, 237, 475, 261]]\n </step1>\n <step2>\n M5(PMOS)[[417, 122, 467, 178]]\n M3(PMOS)[[150, 123, 201, 180]]\n M4(PMOS)[[283, 124, 333, 179]]\n M1(NMOS)[[150, 255, 201, 310]]\n M2(NMOS)[[283, 255, 337, 310]]\n R1(Resistor)[[311, 367, 350, 409]]\n Q1(PNP)[[113, 452, 161, 516]]\n Q2(PNP)[[287, 453, 335, 518]]\n </step2>\n <step3>\n node1: [VDD, M5.S, M3.S, M4.S]\n node2: [M5.G, M3.G, M4.G, M4.D, M2.D]\n node3: [M5.D, out]\n node4: [M3.D, M1.G, M1.D, M2.G]\n node5: [M1.S, Q1.E]\n node6: [M2.S, R1]\n node7: [R1, Q2.E]\n node8: [Q1.C, Q1.B, Q2.C, Q2.B, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [out node3 0]\n [GND node8 0]\n [R1 node6 node7 Resistor]\n [Q1 node8 node8 node5 PNP]\n [Q2 node8 node8 node7 PNP]\n [M5 node2 node3 node1 PMOS]\n [M3 node2 node4 node1 PMOS]\n [M4 node2 node2 node1 PMOS]\n [M1 node4 node4 node5 NMOS]\n [M2 node4 node2 node6 NMOS]\n  </answer>"
+  },
+  {
+    "id": "048",
+    "image": "048.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 618,
+    "length": 684,
+    "answer": "<think>\n <step1>\n VDD(Port)[[38, 422, 106, 442], [221, 28, 475, 45]]\n GND(Port)[[15, 135, 47, 177], [203, 618, 246, 662], [416, 434, 462, 478]]\n Vin(Port)[[122, 326, 144, 349]]\n Vout(Port)[[488, 235, 510, 257]]\n </step1>\n <step2>\n M5(PMOS)[[252, 58, 319, 132]]\n MB(NMOS)[[220, 516, 289, 591]]\n M2(PMOS)[[376, 59, 446, 133]]\n M1(NMOS)[[374, 301, 445, 377]]\n R(Resistor)[[293, 405, 343, 460]]\n CB(Capacitor)[[200, 313, 234, 366]]\n IB2(CurrentSource)[[71, 121, 138, 190]]\n IB1(CurrentSource)[[112, 456, 179, 526]]\n </step2>\n <step3>\n node1: [M5.G, M5.D, M2.G, IB2.-]\n node2: [M5.S, M2.S, IB1.-, VDD]\n node3: [MB.G, MB.D, R, IB1.+]\n node4: [MB.S, M1.S, GND, IB2.+]\n node5: [M2.D, M1.D, Vout]\n node6: [M1.G, R, CB]\n node7: [CB, Vin]\n </step3>\n </think>\n\n <answer>\n [M5 node1 node1 node2 PMOS]\n [MB node3 node3 node4 NMOS]\n [M2 node1 node5 node2 PMOS]\n [M1 node6 node5 node4 NMOS]\n [GND node4 0]\n [R node6 node3 Resistor]\n [CB node7 node6 Capacitor]\n [Vin node7 0]\n [IB2 node4 node1 CurrentSource]\n [IB1 node3 node2 CurrentSource]\n [Vout node5 0]\n [VDD node2 0]\n  </answer>"
+  },
+  {
+    "id": "049",
+    "image": "049.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 736,
+    "length": 484,
+    "answer": "<think>\n <step1>\n VDD(Port)[[192, 24, 621, 41]]\n GND(Port)[[290, 448, 321, 482], [574, 425, 607, 460]]\n Vin(Port)[[122, 284, 139, 301]]\n Vout(Port)[[627, 284, 643, 301]]\n </step1>\n <step2>\n ISS(CurrentSource)[[281, 371, 330, 422]]\n M1(NMOS)[[171, 266, 222, 319]]\n M4(PMOS)[[347, 69, 397, 123]]\n M3(PMOS)[[214, 69, 265, 122]]\n I1(CurrentSource)[[564, 348, 617, 400]]\n M5(PMOS)[[545, 180, 595, 233]]\n CC(Capacitor)[[462, 238, 500, 264]]\n M2(NMOS)[[389, 265, 441, 319]]\n </step2>\n <step3>\n node1: [ISS.-, M1.S, M2.S]\n node2: [ISS.+, I1.+, GND]\n node3: [M1.G, Vin]\n node4: [M1.D, M3.D, M5.G, CC]\n node5: [M4.G, M4.D, M3.G, M2.D]\n node6: [M4.S, M3.S, M5.S, VDD]\n node7: [I1.-, M5.D, CC, M2.G, Vout]\n </step3>\n </think>\n\n <answer>\n [GND node2 0]\n [Vin node3 0]\n [Vout node7 0]\n [VDD node6 0]\n [ISS node2 node1 CurrentSource]\n [M1 node3 node4 node1 NMOS]\n [M4 node5 node5 node6 PMOS]\n [M3 node5 node4 node6 PMOS]\n [I1 node2 node7 CurrentSource]\n [M5 node4 node7 node6 PMOS]\n [CC node4 node7 Capacitor]\n [M2 node7 node5 node1 NMOS]\n  </answer>"
+  },
+  {
+    "id": "050",
+    "image": "050.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 858,
+    "length": 760,
+    "answer": "<think>\n <step1>\n VDD(Port)[[38, 38, 752, 57]]\n GND(Port)[[369, 686, 415, 734]]\n Vout2(Port)[[444, 319, 468, 342]]\n Vin1(Port)[[95, 414, 119, 440]]\n Vout1(Port)[[318, 319, 340, 343]]\n Vin2(Port)[[95, 512, 119, 536]]\n </step1>\n <step2>\n M4(PMOS)[[485, 103, 557, 182]]\n M5(PMOS)[[103, 102, 175, 181]]\n M3(PMOS)[[230, 103, 301, 181]]\n M1(NMOS)[[166, 389, 240, 468]]\n ISS(CurrentSource)[[357, 574, 430, 647]]\n M6(PMOS)[[613, 102, 683, 181]]\n M2(NMOS)[[548, 389, 620, 468]]\n </step2>\n <step3>\n node1: [M4.G, M5.G, M5.D, M3.D, M1.D, Vout1]\n node2: [M4.D, M3.G, M6.G, M6.D, M2.D, Vout2]\n node3: [M4.S, M5.S, M3.S, M6.S, VDD]\n node4: [GND, ISS.+]\n node5: [M1.G, Vin1]\n node6: [M1.S, ISS.-, M2.S]\n node7: [M2.G, Vin2]\n </step3>\n </think>\n\n <answer>\n [M4 node1 node2 node3 PMOS]\n [M5 node1 node1 node3 PMOS]\n [M3 node2 node1 node3 PMOS]\n [GND node4 0]\n [M1 node5 node1 node6 NMOS]\n [ISS node4 node6 CurrentSource]\n [M6 node2 node2 node3 PMOS]\n [M2 node7 node2 node6 NMOS]\n [Vout2 node2 0]\n [Vin1 node5 0]\n [Vout1 node1 0]\n [Vin2 node7 0]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "051",
+    "image": "051.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1174,
+    "length": 835,
+    "answer": "<think>\n <step1>\n GND(Port)[[190, 261, 237, 307], [329, 668, 374, 712], [422, 682, 462, 727], [573, 683, 615, 728], [649, 292, 693, 337], [709, 19, 753, 62], [786, 668, 830, 714]]\n Vb(Port)[[218, 392, 241, 417]]\n Vout(Port)[[889, 515, 910, 538]]\n V1+(Port)[[592, 521, 602, 534]]\n </step1>\n <step2>\n IF(CurrentSource)[[407, 575, 477, 646]]\n M1(NMOS)[[286, 247, 360, 321]]\n M9(NMOS)[[282, 368, 358, 443]]\n M5(PMOS)[[744, 277, 814, 352]]\n ro3(Resistor)[[783, 76, 832, 130]]\n ron8(Resistor)[[329, 577, 376, 634]]\n ro2(Resistor)[[787, 577, 831, 635]]\n </step2>\n <step3>\n node1: [IF.+, M1.G, GND, M5.G, ro3, ron8, ro2]\n node2: [IF.-, M9.S, ron8]\n node3: [M1.D, M5.S, ro3]\n node4: [M1.S, M9.D]\n node5: [M9.G, Vb]\n node6: [M5.D, ro2, Vout, V1+]\n </step3>\n </think>\n\n <answer>\n [IF node1 node2 CurrentSource]\n [M1 node1 node3 node4 NMOS]\n [M9 node5 node4 node2 NMOS]\n [GND node1 0]\n [M5 node1 node6 node3 PMOS]\n [ro3 node1 node3 Resistor]\n [ron8 node2 node1 Resistor]\n [ro2 node6 node1 Resistor]\n [Vb node5 0]\n [Vout node6 0]\n [V1+ node6 0]\n  </answer>"
+  },
+  {
+    "id": "052",
+    "image": "052.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 764,
+    "length": 508,
+    "answer": "<think>\n <step1>\n VDD(Port)[[135, 38, 542, 52]]\n GND(Port)[[222, 205, 257, 235], [255, 463, 288, 497], [497, 463, 530, 497], [586, 419, 619, 453]]\n Vin(Port)[[67, 298, 83, 316]]\n Vout(Port)[[659, 298, 675, 316]]\n </step1>\n <step2>\n M4(PMOS)[[337, 84, 386, 138]]\n M1(NMOS)[[116, 279, 168, 335]]\n I2(CurrentSource)[[489, 387, 540, 437]]\n I1(CurrentSource)[[247, 387, 298, 437]]\n M2(NMOS)[[379, 279, 431, 335]]\n C2(Capacitor)[[584, 365, 621, 388]]\n M3(PMOS)[[159, 83, 208, 138]]\n M5(NMOS)[[469, 193, 519, 247]]\n C1(Capacitor)[[298, 200, 323, 240]]\n </step2>\n <step3>\n node1: [M4.G, M1.D, M3.G, M3.D]\n node2: [M4.D, M2.D, M5.G, C1]\n node3: [M4.S, M3.S, M5.D, VDD]\n node4: [M1.G, Vin]\n node5: [M1.S, I1.-, M2.S]\n node6: [I2.+, I1.+, C2, GND, C1]\n node7: [I2.-, M2.G, M5.S, C2, Vout]\n </step3>\n </think>\n\n <answer>\n [M4 node1 node2 node3 PMOS]\n [M1 node4 node1 node5 NMOS]\n [I2 node6 node7 CurrentSource]\n [I1 node6 node5 CurrentSource]\n [M2 node7 node2 node5 NMOS]\n [C2 node6 node7 Capacitor]\n [GND node6 0]\n [M3 node1 node1 node3 PMOS]\n [Vin node4 0]\n [M5 node2 node3 node7 NMOS]\n [Vout node7 0]\n [C1 node6 node2 Capacitor]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "053",
+    "image": "053.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1100,
+    "length": 748,
+    "answer": "<think>\n <step1>\n VDD(Port)[[183, 53, 825, 72]]\n GND(Port)[[308, 641, 353, 687], [578, 450, 624, 495], [770, 640, 815, 688], [866, 640, 912, 689]]\n -(Port)[[78, 494, 102, 520]]\n +(Port)[[80, 399, 103, 424]]\n Vb(Port)[[302, 146, 325, 171]]\n Vout(Port)[[940, 465, 963, 489]]\n </step1>\n <step2>\n M3(PMOS)[[377, 120, 447, 197]]\n M4(NMOS)[[725, 246, 800, 325]]\n CX(Capacitor)[[575, 367, 629, 402]]\n M1(NMOS)[[150, 372, 225, 453]]\n M2(NMOS)[[437, 373, 510, 454]]\n I1(CurrentSource)[[755, 527, 831, 601]]\n ISS(CurrentSource)[[292, 527, 367, 601]]\n CY(Capacitor)[[861, 559, 914, 593]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.D, M1.D]\n node2: [M3.G, Vb]\n node3: [M3.D, M4.G, CX, M2.D]\n node4: [M4.S, Vout, I1.-, CY]\n node5: [CX, GND, I1.+, ISS.+, CY]\n node6: [M1.G, +]\n node7: [M1.S, M2.S, ISS.-]\n node8: [M2.G, -]\n </step3>\n </think>\n\n <answer>\n [+ node6 0]\n [- node8 0]\n [Vb node2 0]\n [VDD node1 0]\n [GND node5 0]\n [Vout node4 0]\n [CX node3 node5 Capacitor]\n [CY node4 node5 Capacitor]\n [M3 node2 node3 node1 PMOS]\n [M4 node3 node1 node4 NMOS]\n [M1 node6 node1 node7 NMOS]\n [M2 node8 node3 node7 NMOS]\n [I1 node5 node4 CurrentSource]\n [ISS node5 node7 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "054",
+    "image": "054.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 628,
+    "length": 730,
+    "answer": "<think>\n <step1>\n VDD(Port)[[33, 462, 102, 479], [219, 34, 469, 55]]\n GND(Port)[[198, 655, 240, 702], [412, 471, 456, 515]]\n Vout(Port)[[483, 275, 504, 297]]\n Vin(Port)[[117, 366, 139, 387]]\n </step1>\n <step2>\n M2(PMOS)[[369, 96, 439, 170]]\n M1(NMOS)[[368, 338, 438, 413]]\n MB(NMOS)[[214, 552, 284, 628]]\n R(Resistor)[[290, 441, 337, 500]]\n RG(Resistor)[[290, 168, 343, 217]]\n IB1(CurrentSource)[[105, 495, 175, 565]]\n CB(Capacitor)[[194, 349, 227, 403]]\n CG(Capacitor)[[225, 88, 278, 122]]\n </step2>\n <step3>\n node1: [M2.G, RG, CG]\n node2: [M2.D, M1.D, RG, Vout]\n node3: [M2.S, IB1.-, VDD, CG]\n node4: [M1.G, R, CB]\n node5: [M1.S, MB.S, GND]\n node6: [MB.G, MB.D, R, IB1.+]\n node7: [Vin, CB]\n </step3>\n </think>\n\n <answer>\n [M2 node1 node2 node3 PMOS]\n [M1 node4 node2 node5 NMOS]\n [MB node6 node6 node5 NMOS]\n [GND node5 0]\n [R node4 node6 Resistor]\n [RG node1 node2 Resistor]\n [Vout node2 0]\n [IB1 node6 node3 CurrentSource]\n [Vin node7 0]\n [CB node7 node4 Capacitor]\n [VDD node3 0]\n [CG node3 node1 Capacitor]\n  </answer>"
+  },
+  {
+    "id": "055",
+    "image": "055.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 452,
+    "length": 432,
+    "answer": "<think>\n <step1>\n VDD(Port)[[135, 36, 381, 49]]\n GND(Port)[[89, 375, 116, 402], [145, 357, 172, 384], [273, 393, 300, 420], [346, 356, 372, 384]]\n Vout(Port)[[206, 143, 219, 158]]\n Vin(Port)[[59, 256, 73, 271]]\n Vb(Port)[[224, 200, 238, 214]]\n </step1>\n <step2>\n I2n2(CurrentSource)[[82, 308, 124, 351]]\n I1(CurrentSource)[[338, 70, 381, 113]]\n M2(NMOS)[[153, 295, 196, 340]]\n M1(NMOS)[[155, 184, 197, 230]]\n M0(NMOS)[[321, 295, 365, 342]]\n C0(Capacitor)[[271, 347, 303, 366]]\n RD(Resistor)[[143, 80, 174, 115]]\n </step2>\n <step3>\n node1: [GND, I2n2.+, M2.S, M0.S, C0]\n node2: [I2n2.-, M2.D, M1.S, Vin]\n node3: [I1.-, RD, VDD]\n node4: [I1.+, M2.G, M0.G, M0.D, C0]\n node5: [M1.G, Vb]\n node6: [M1.D, RD, Vout]\n </step3>\n </think>\n\n <answer>\n [GND node1 0]\n [Vout node6 0]\n [Vin node2 0]\n [Vb node5 0]\n [VDD node3 0]\n [I2n2 node1 node2 CurrentSource]\n [I1 node4 node3 CurrentSource]\n [M2 node4 node2 node1 NMOS]\n [M1 node5 node6 node2 NMOS]\n [M0 node4 node4 node1 NMOS]\n [C0 node4 node1 Capacitor]\n [RD node3 node6 Resistor]\n  </answer>"
+  },
+  {
+    "id": "056",
+    "image": "056.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1088,
+    "length": 534,
+    "answer": "<think>\n <step1>\n VDD(Port)[[222, 78, 741, 97]]\n GND(Port)[[228, 453, 272, 499], [382, 424, 425, 473], [685, 455, 729, 500], [839, 426, 881, 471]]\n Vb(Port)[[116, 164, 139, 187]]\n Vin(Port)[[116, 347, 139, 371]]\n Vout(Port)[[941, 257, 964, 279]]\n </step1>\n <step2>\n M2(PMOS)[[185, 140, 255, 214]]\n M4(PMOS)[[646, 140, 715, 214]]\n M3(NMOS)[[644, 321, 711, 397]]\n M1(NMOS)[[185, 322, 255, 396]]\n CL1(Capacitor)[[375, 346, 429, 381]]\n CL2(Capacitor)[[835, 347, 886, 380]]\n </step2>\n <step3>\n node1: [VDD, M2.S, M4.S]\n node2: [M2.G, M4.G, Vb]\n node3: [M2.D, M3.G, M1.D, CL1]\n node4: [M4.D, Vout, M3.D, CL2]\n node5: [M3.S, M1.S, CL1, CL2, GND]\n node6: [M1.G, Vin]\n </step3>\n </think>\n\n <answer>\n [Vb node2 0]\n [VDD node1 0]\n [Vin node6 0]\n [GND node5 0]\n [Vout node4 0]\n [M2 node2 node3 node1 PMOS]\n [M4 node2 node4 node1 PMOS]\n [M3 node3 node4 node5 NMOS]\n [M1 node6 node3 node5 NMOS]\n [CL1 node3 node5 Capacitor]\n [CL2 node4 node5 Capacitor]\n  </answer>"
+  },
+  {
+    "id": "057",
+    "image": "057.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 764,
+    "length": 572,
+    "answer": "<think>\n <step1>\n VDD(Port)[[140, 59, 626, 78]]\n GND(Port)[[100, 519, 137, 560], [233, 519, 268, 560], [312, 519, 347, 559]]\n Vb(Port)[[636, 453, 655, 473]]\n </step1>\n <step2>\n ISS(CurrentSource)[[220, 427, 281, 486]]\n L2(Inductor)[[568, 93, 620, 175]]\n M1(NMOS)[[168, 299, 229, 365]]\n In(CurrentSource)[[299, 427, 359, 486]]\n M2(NMOS)[[537, 297, 597, 363]]\n R1(Resistor)[[495, 415, 541, 459]]\n CT(Capacitor)[[97, 450, 142, 480]]\n R2(Resistor)[[494, 467, 540, 510]]\n L1(Inductor)[[145, 93, 196, 174]]\n C1(Capacitor)[[228, 227, 257, 274]]\n C2(Capacitor)[[517, 226, 548, 274]]\n </step2>\n <step3>\n node1: [ISS.+, In.+, GND, CT]\n node2: [ISS.-, M1.S, In.-, M2.S, CT]\n node3: [L2, L1, VDD]\n node4: [L2, M2.D, C2]\n node5: [M1.G, R2, C2]\n node6: [M1.D, L1, C1]\n node7: [M2.G, R1, C1]\n node8: [R1, R2, Vb]\n </step3>\n </think>\n\n <answer>\n [ISS node1 node2 CurrentSource]\n [L2 node3 node4 Inductor]\n [M1 node5 node6 node2 NMOS]\n [In node1 node2 CurrentSource]\n [M2 node7 node4 node2 NMOS]\n [GND node1 0]\n [R1 node7 node8 Resistor]\n [CT node2 node1 Capacitor]\n [R2 node5 node8 Resistor]\n [L1 node3 node6 Inductor]\n [C1 node6 node7 Capacitor]\n [C2 node5 node4 Capacitor]\n [Vb node8 0]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "058",
+    "image": "058.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 934,
+    "length": 690,
+    "answer": "<think>\n <step1>\n VDD(Port)[[186, 33, 780, 53]]\n GND(Port)[[318, 623, 362, 670], [714, 591, 758, 639]]\n Vin(Port)[[85, 393, 107, 417]]\n Vout(Port)[[787, 393, 809, 417]]\n </step1>\n <step2>\n ISS(CurrentSource)[[308, 515, 375, 584]]\n M4(PMOS)[[399, 96, 468, 168]]\n M5(PMOS)[[673, 248, 742, 321]]\n M3(PMOS)[[213, 94, 283, 170]]\n M1(NMOS)[[152, 367, 224, 443]]\n M2(NMOS)[[457, 369, 527, 443]]\n CC(Capacitor)[[559, 332, 612, 365]]\n I1(CurrentSource)[[702, 484, 774, 556]]\n </step2>\n <step3>\n node1: [ISS.+, GND, I1.+]\n node2: [ISS.-, M1.S, M2.S]\n node3: [M4.G, M3.G]\n node4: [M4.D, M2.D]\n node5: [M4.S, M5.S, M3.S, VDD]\n node6: [M5.G, M3.D, M1.D, CC]\n node7: [M5.D, M2.G, CC, I1.-, Vout]\n node8: [M1.G, Vin]\n </step3>\n </think>\n\n <answer>\n [ISS node1 node2 CurrentSource]\n [M4 node3 node4 node5 PMOS]\n [M5 node6 node7 node5 PMOS]\n [GND node1 0]\n [M3 node3 node6 node5 PMOS]\n [M1 node8 node6 node2 NMOS]\n [M2 node7 node4 node2 NMOS]\n [CC node6 node7 Capacitor]\n [I1 node1 node7 CurrentSource]\n [Vin node8 0]\n [Vout node7 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "059",
+    "image": "059.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 944,
+    "length": 860,
+    "answer": "<think>\n <step1>\n VDD(Port)[[226, 50, 680, 70]]\n GND(Port)[[430, 763, 476, 811]]\n V1(Port)[[121, 460, 144, 485]]\n V2(Port)[[759, 460, 785, 485]]\n </step1>\n <step2>\n M3(PMOS)[[255, 114, 326, 194]]\n M4(PMOS)[[577, 115, 650, 193]]\n M1(NMOS)[[192, 432, 267, 513]]\n M2(NMOS)[[638, 433, 713, 515]]\n RO2(Resistor)[[554, 477, 607, 536]]\n RO1(Resistor)[[301, 478, 351, 536]]\n ISS(CurrentSource)[[416, 651, 491, 724]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M3.D, M4.G, M1.D, RO1]\n node3: [M4.D, M2.D, RO2]\n node4: [M1.G, V1]\n node5: [M1.S, M2.S, RO2, RO1, ISS.-]\n node6: [M2.G, V2]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [V1 node4 0]\n [V2 node6 0]\n [VDD node1 0]\n [GND node7 0]\n [RO2 node3 node5 Resistor]\n [RO1 node2 node5 Resistor]\n [M3 node2 node2 node1 PMOS]\n [M4 node2 node3 node1 PMOS]\n [M1 node4 node2 node5 NMOS]\n [M2 node6 node3 node5 NMOS]\n [ISS node7 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "060",
+    "image": "060.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 664,
+    "length": 612,
+    "answer": "<think>\n <step1>\n GND(Port)[[454, 102, 488, 136], [455, 494, 487, 528]]\n VLO(Port)[[309, 87, 325, 103]]\n Vout1(Port)[[550, 241, 566, 257]]\n VRF(Port)[[88, 306, 104, 323]]\n Vout2(Port)[[550, 373, 566, 391]]\n VLO2(Port)[[308, 528, 325, 545]]\n </step1>\n <step2>\n M2(PMOS)[[290, 377, 346, 428]]\n M1(NMOS)[[290, 204, 345, 251]]\n CGS2(Capacitor)[[253, 428, 278, 466]]\n RL2(Resistor)[[452, 426, 490, 466]]\n CGS1(Capacitor)[[254, 165, 278, 204]]\n RL1(Resistor)[[452, 165, 489, 207]]\n CGD1(Capacitor)[[365, 165, 390, 204]]\n CGD2(Capacitor)[[364, 428, 390, 467]]\n </step2>\n <step3>\n node1: [M2.G, CGS2, CGD2, VLO2]\n node2: [M2.D, RL2, CGD2, Vout2]\n node3: [M2.S, M1.S, CGS2, CGS1, VRF]\n node4: [M1.G, CGS1, CGD1, VLO]\n node5: [M1.D, RL1, CGD1, Vout1]\n node6: [GND, RL2, RL1]\n </step3>\n </think>\n\n <answer>\n [M2 node1 node2 node3 PMOS]\n [M1 node4 node5 node3 NMOS]\n [GND node6 0]\n [CGS2 node1 node3 Capacitor]\n [RL2 node2 node6 Resistor]\n [CGS1 node4 node3 Capacitor]\n [RL1 node5 node6 Resistor]\n [CGD1 node4 node5 Capacitor]\n [CGD2 node1 node2 Capacitor]\n [VLO node4 0]\n [Vout1 node5 0]\n [VRF node3 0]\n [Vout2 node2 0]\n [VLO2 node1 0]\n  </answer>"
+  },
+  {
+    "id": "061",
+    "image": "061.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 806,
+    "length": 496,
+    "answer": "<think>\n <step1>\n VDD(Port)[[72, 29, 670, 46]]\n GND(Port)[[81, 434, 114, 466], [321, 434, 354, 466], [628, 434, 661, 466], [695, 347, 726, 379]]\n Vb(Port)[[417, 137, 434, 154]]\n Vout(Port)[[769, 225, 785, 241]]\n </step1>\n <step2>\n CE(Capacitor)[[451, 70, 490, 95]]\n RS(Resistor)[[319, 83, 356, 124]]\n M9(PMOS)[[601, 120, 650, 174]]\n Mb4(PMOS)[[292, 163, 343, 218]]\n Mb3(PMOS)[[92, 163, 143, 217]]\n CC(Capacitor)[[582, 213, 608, 254]]\n RZ(Resistor)[[520, 215, 559, 253]]\n CL(Capacitor)[[693, 290, 731, 315]]\n Mb1(NMOS)[[92, 360, 143, 414]]\n M11(NMOS)[[598, 361, 650, 415]]\n Mb2(NMOS)[[291, 361, 341, 414]]\n </step2>\n <step3>\n node1: [VDD, CE, RS, M9.S, Mb3.S]\n node2: [CE, M9.G, Vb, RZ]\n node3: [RS, Mb4.S]\n node4: [M9.D, CC, Vout, CL, M11.D]\n node5: [Mb4.G, Mb4.D, Mb3.G, Mb2.D]\n node6: [Mb3.D, Mb1.G, Mb1.D, M11.G, Mb2.G]\n node7: [CC, RZ]\n node8: [CL, GND, Mb1.S, M11.S, Mb2.S]\n </step3>\n </think>\n\n <answer>\n [Vb node2 0]\n [VDD node1 0]\n [GND node8 0]\n [Vout node4 0]\n [RS node1 node3 Resistor]\n [RZ node2 node7 Resistor]\n [CE node1 node2 Capacitor]\n [CC node7 node4 Capacitor]\n [CL node4 node8 Capacitor]\n [M9 node2 node4 node1 PMOS]\n [Mb4 node5 node5 node3 PMOS]\n [Mb3 node5 node6 node1 PMOS]\n [Mb1 node6 node6 node8 NMOS]\n [M11 node6 node4 node8 NMOS]\n [Mb2 node6 node5 node8 NMOS]\n  </answer>"
+  },
+  {
+    "id": "062",
+    "image": "062.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 880,
+    "length": 692,
+    "answer": "<think>\n <step1>\n VDD(Port)[[34, 49, 749, 70]]\n GND(Port)[[50, 488, 93, 532], [384, 609, 430, 657], [569, 487, 613, 533], [690, 579, 734, 624]]\n </step1>\n <step2>\n M1(NMOS)[[67, 385, 136, 461]]\n M4(PMOS)[[67, 114, 136, 187]]\n M3(PMOS)[[345, 113, 413, 188]]\n M5(NMOS)[[585, 383, 657, 464]]\n M6(NMOS)[[707, 477, 776, 555]]\n M2(NMOS)[[342, 383, 412, 461]]\n RS(Resistor)[[382, 519, 432, 576]]\n Ra(Resistor)[[687, 121, 737, 180]]\n Rb(Resistor)[[688, 305, 736, 363]]\n </step2>\n <step3>\n node1: [M1.G, M1.D, M4.D, M2.G]\n node2: [M1.S, GND, M5.S, M6.S, RS]\n node3: [M4.G, M3.G]\n node4: [M4.S, M3.S, Ra, VDD]\n node5: [M3.D, M5.D, M2.D]\n node6: [M5.G, M6.D, Rb]\n node7: [M6.G, Ra, Rb]\n node8: [M2.S, RS]\n </step3>\n </think>\n\n <answer>\n [M1 node1 node1 node2 NMOS]\n [GND node2 0]\n [M4 node3 node1 node4 PMOS]\n [M3 node3 node5 node4 PMOS]\n [M5 node6 node5 node2 NMOS]\n [M6 node7 node6 node2 NMOS]\n [M2 node1 node5 node8 NMOS]\n [RS node8 node2 Resistor]\n [Ra node4 node7 Resistor]\n [Rb node7 node6 Resistor]\n [VDD node4 0]\n  </answer>"
+  },
+  {
+    "id": "063",
+    "image": "063.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 538,
+    "length": 396,
+    "answer": "<think>\n <step1>\n VDD(Port)[[28, 28, 402, 39]]\n GND(Port)[[36, 209, 61, 235], [115, 142, 139, 170], [299, 367, 325, 394], [495, 142, 523, 169]]\n +(Port)[[164, 217, 177, 232]]\n -(Port)[[164, 270, 177, 285]]\n 1(Port)[[270, 149, 283, 162]]\n 2(Port)[[339, 149, 353, 162]]\n </step1>\n <step2>\n M5(PMOS)[[45, 62, 84, 106]]\n M4(PMOS)[[345, 63, 385, 106]]\n M3(PMOS)[[204, 63, 243, 106]]\n CL2(Capacitor)[[455, 139, 476, 171]]\n CL1(Capacitor)[[155, 139, 175, 171]]\n I5(CurrentSource)[[28, 148, 69, 188]]\n M2(NMOS)[[379, 202, 419, 247]]\n M1(NMOS)[[204, 202, 243, 247]]\n ISS(CurrentSource)[[290, 306, 331, 346]]\n </step2>\n <step3>\n node1: [VDD, M5.S, M4.S, M3.S]\n node2: [M5.G, M5.D, M4.G, M3.G, I5.-]\n node3: [M4.D, CL2, 2, M2.D]\n node4: [M3.D, CL1, 1, M1.D]\n node5: [CL2, CL1, GND, I5.+, ISS.+]\n node6: [M2.G, -]\n node7: [M2.S, M1.S, ISS.-]\n node8: [M1.G, +]\n </step3>\n </think>\n\n <answer>\n [1 node4 0]\n [2 node3 0]\n [+ node8 0]\n [- node6 0]\n [VDD node1 0]\n [GND node5 0]\n [M5 node2 node2 node1 PMOS]\n [M4 node2 node3 node1 PMOS]\n [M3 node2 node4 node1 PMOS]\n [CL2 node3 node5 Capacitor]\n [CL1 node5 node4 Capacitor]\n [M2 node6 node3 node7 NMOS]\n [M1 node8 node4 node7 NMOS]\n [I5 node5 node2 CurrentSource]\n [ISS node5 node7 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "064",
+    "image": "064.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1160,
+    "length": 848,
+    "answer": "<think>\n <step1>\n VDD(Port)[[164, 39, 990, 60]]\n GND(Port)[[201, 750, 246, 799], [448, 494, 487, 538], [539, 721, 580, 766], [661, 494, 702, 538]]\n +(Port)[[88, 431, 114, 455]]\n Vout1(Port)[[426, 217, 449, 240]]\n Vout2(Port)[[701, 218, 724, 239]]\n -(Port)[[1037, 430, 1060, 454]]\n </step1>\n <step2>\n M4(PMOS)[[768, 99, 834, 176]]\n M7(PMOS)[[188, 100, 256, 173]]\n M2(PMOS)[[313, 101, 383, 175]]\n M8(PMOS)[[893, 101, 962, 175]]\n M6(NMOS)[[920, 405, 992, 482]]\n M1(NMOS)[[312, 406, 383, 483]]\n M3(NMOS)[[768, 406, 838, 483]]\n M5(NMOS)[[158, 407, 228, 481]]\n CL1(Capacitor)[[441, 430, 494, 464]]\n CL2(Capacitor)[[655, 430, 711, 463]]\n ISS1(CurrentSource)[[525, 615, 595, 684]]\n ISS2(CurrentSource)[[190, 645, 260, 715]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M7.S, M2.S, M8.S]\n node2: [M4.G, M8.G, M8.D, M5.D]\n node3: [M4.D, Vout2, M3.D, CL2]\n node4: [M7.G, M7.D, M2.G, M6.D]\n node5: [M2.D, Vout1, M1.D, CL1]\n node6: [M6.G, M3.G, -]\n node7: [M6.S, M5.S, ISS2.-]\n node8: [M1.G, M5.G, +]\n node9: [M1.S, M3.S, ISS1.-]\n node10: [CL1, CL2, GND, ISS1.+, ISS2.+]\n </step3>\n </think>\n\n <answer>\n [- node6 0]\n [+ node8 0]\n [VDD node1 0]\n [GND node10 0]\n [Vout1 node5 0]\n [Vout2 node3 0]\n [M4 node2 node3 node1 PMOS]\n [M7 node4 node4 node1 PMOS]\n [M2 node4 node5 node1 PMOS]\n [M8 node2 node2 node1 PMOS]\n [M6 node6 node4 node7 NMOS]\n [M1 node8 node5 node9 NMOS]\n [M3 node6 node3 node9 NMOS]\n [M5 node8 node2 node7 NMOS]\n [CL1 node5 node10 Capacitor]\n [CL2 node3 node10 Capacitor]\n [ISS1 node10 node9 CurrentSource]\n [ISS2 node10 node7 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "065",
+    "image": "065.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 708,
+    "length": 708,
+    "answer": "<think>\n <step1>\n VDD(Port)[[147, 46, 534, 66]]\n GND(Port)[[315, 631, 359, 677]]\n Vin1(Port)[[39, 359, 63, 385]]\n Vout(Port)[[582, 267, 605, 290]]\n Vin2(Port)[[611, 364, 631, 385]]\n </step1>\n <step2>\n M3(PMOS)[[174, 110, 244, 188]]\n M4(PMOS)[[432, 111, 504, 190]]\n C1(Capacitor)[[336, 250, 371, 303]]\n M1(NMOS)[[111, 333, 186, 412]]\n M2(NMOS)[[494, 334, 566, 411]]\n ISS(CurrentSource)[[302, 520, 373, 592]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M3.D, M4.G, C1, M1.D]\n node3: [M4.D, C1, Vout, M2.D]\n node4: [M1.G, Vin1]\n node5: [M1.S, M2.S, ISS.-]\n node6: [M2.G, Vin2]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node7 0]\n [Vout node3 0]\n [Vin1 node4 0]\n [Vin2 node6 0]\n [C1 node2 node3 Capacitor]\n [M3 node2 node2 node1 PMOS]\n [M4 node2 node3 node1 PMOS]\n [M1 node4 node2 node5 NMOS]\n [M2 node6 node3 node5 NMOS]\n [ISS node7 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "066",
+    "image": "066.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 846,
+    "length": 654,
+    "answer": "<think>\n <step1>\n VDD(Port)[[226, 37, 618, 57]]\n GND(Port)[[399, 585, 441, 631]]\n Vin1(Port)[[121, 352, 145, 375]]\n Vout(Port)[[663, 254, 686, 279]]\n Vin2(Port)[[694, 350, 719, 375]]\n </step1>\n <step2>\n M4(PMOS)[[514, 101, 585, 179]]\n M3(PMOS)[[258, 102, 328, 179]]\n R1(Resistor)[[331, 272, 383, 331]]\n M1(NMOS)[[192, 323, 267, 402]]\n M2(NMOS)[[574, 325, 648, 404]]\n ISS(CurrentSource)[[383, 470, 456, 544]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M3.S]\n node2: [M4.G, M3.G, M3.D, R1, M1.D]\n node3: [M4.D, Vout, M2.D]\n node4: [R1, M1.S, M2.S, ISS.-]\n node5: [M1.G, Vin1]\n node6: [M2.G, Vin2]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node7 0]\n [Vout node3 0]\n [Vin2 node6 0]\n [Vin1 node5 0]\n [R1 node2 node4 Resistor]\n [M4 node2 node3 node1 PMOS]\n [M3 node2 node2 node1 PMOS]\n [M1 node5 node2 node4 NMOS]\n [M2 node6 node3 node4 NMOS]\n [ISS node7 node4 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "067",
+    "image": "067.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 844,
+    "length": 630,
+    "answer": "<think>\n <step1>\n VDD(Port)[[227, 25, 607, 48]]\n GND(Port)[[395, 573, 439, 620]]\n Vin1(Port)[[119, 340, 142, 364]]\n Vout(Port)[[660, 245, 684, 270]]\n Vin2(Port)[[692, 340, 717, 364]]\n </step1>\n <step2>\n M3(PMOS)[[254, 91, 323, 168]]\n M4(PMOS)[[510, 92, 583, 169]]\n R1(Resistor)[[392, 231, 451, 283]]\n M1(NMOS)[[188, 312, 264, 392]]\n M2(NMOS)[[572, 313, 645, 391]]\n ISS(CurrentSource)[[380, 461, 453, 533]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M3.D, M4.G, R1, M1.D]\n node3: [M4.D, R1, Vout, M2.D]\n node4: [M1.G, Vin1]\n node5: [M1.S, M2.S, ISS.-]\n node6: [M2.G, Vin2]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node7 0]\n [Vout node3 0]\n [Vin1 node4 0]\n [Vin2 node6 0]\n [R1 node2 node3 Resistor]\n [M3 node2 node2 node1 PMOS]\n [M4 node2 node3 node1 PMOS]\n [M1 node4 node2 node5 NMOS]\n [M2 node6 node3 node5 NMOS]\n [ISS node7 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "068",
+    "image": "068.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 648,
+    "length": 636,
+    "answer": "<think>\n <step1>\n VDD(Port)[[111, 61, 544, 78]]\n GND(Port)[[123, 571, 161, 610], [491, 572, 528, 612]]\n out(Port)[[605, 374, 624, 395]]\n in(Port)[[26, 374, 46, 394]]\n </step1>\n <step2>\n M2(NMOS)[[503, 351, 569, 418]]\n M4(PMOS)[[373, 168, 435, 233]]\n M1(NMOS)[[83, 351, 150, 418]]\n I3(CurrentSource)[[112, 110, 171, 171]]\n M3(PMOS)[[218, 168, 279, 234]]\n I4(CurrentSource)[[478, 110, 540, 170]]\n I2(CurrentSource)[[480, 489, 541, 549]]\n I1(CurrentSource)[[111, 489, 172, 550]]\n RS(Resistor)[[306, 415, 353, 458]]\n </step2>\n <step3>\n node1: [M2.G, out]\n node2: [M2.D, M4.G, I4.+]\n node3: [M2.S, M4.D, I2.-, RS]\n node4: [M4.S, I3.-, M3.S, I4.-, VDD]\n node5: [GND, I2.+, I1.+]\n node6: [M1.G, in]\n node7: [M1.D, I3.+, M3.G]\n node8: [M1.S, M3.D, I1.-, RS]\n </step3>\n </think>\n\n <answer>\n [M2 node1 node2 node3 NMOS]\n [M4 node2 node3 node4 PMOS]\n [GND node5 0]\n [M1 node6 node7 node8 NMOS]\n [I3 node7 node4 CurrentSource]\n [M3 node7 node8 node4 PMOS]\n [I4 node2 node4 CurrentSource]\n [I2 node5 node3 CurrentSource]\n [I1 node5 node8 CurrentSource]\n [RS node8 node3 Resistor]\n [out node1 0]\n [in node6 0]\n [VDD node4 0]\n  </answer>"
+  },
+  {
+    "id": "069",
+    "image": "069.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 870,
+    "length": 664,
+    "answer": "<think>\n <step1>\n VDD(Port)[[154, 30, 522, 49]]\n GND(Port)[[163, 345, 208, 391], [287, 590, 330, 635], [469, 499, 511, 543], [621, 499, 664, 543]]\n Vout(Port)[[725, 329, 746, 352]]\n </step1>\n <step2>\n Mp2(PMOS)[[182, 90, 248, 166]]\n Mp1(PMOS)[[428, 91, 498, 166]]\n I1(CurrentSource)[[151, 238, 222, 310]]\n CF(Capacitor)[[373, 315, 409, 367]]\n Mout(NMOS)[[427, 394, 496, 471]]\n CL(Capacitor)[[618, 421, 671, 453]]\n I2(CurrentSource)[[274, 480, 347, 551]]\n </step2>\n <step3>\n node1: [VDD, Mp2.S, Mp1.S]\n node2: [Mp2.G, Mp2.D, Mp1.G, I1.-]\n node3: [Mp1.D, CF, Vout, Mout.D, CL]\n node4: [I1.+, GND, Mout.S, CL, I2.+]\n node5: [CF, Mout.G, I2.-]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node4 0]\n [Vout node3 0]\n [CF node5 node3 Capacitor]\n [CL node3 node4 Capacitor]\n [Mp2 node2 node2 node1 PMOS]\n [Mp1 node2 node3 node1 PMOS]\n [Mout node5 node3 node4 NMOS]\n [I1 node4 node2 CurrentSource]\n [I2 node4 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "070",
+    "image": "070.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 714,
+    "length": 478,
+    "answer": "<think>\n <step1>\n VDD(Port)[[94, 37, 562, 52]]\n GND(Port)[[105, 418, 136, 453], [522, 397, 555, 430], [588, 354, 618, 387]]\n Vb(Port)[[267, 144, 282, 160]]\n Vb2(Port)[[441, 342, 458, 359]]\n Vout(Port)[[661, 231, 677, 249]]\n </step1>\n <step2>\n CE(Capacitor)[[298, 76, 337, 101]]\n M13(PMOS)[[115, 125, 166, 181]]\n M9(PMOS)[[492, 127, 542, 180]]\n CC(Capacitor)[[476, 220, 501, 260]]\n M14(PMOS)[[116, 236, 168, 290]]\n M15(NMOS)[[334, 237, 390, 288]]\n CL(Capacitor)[[586, 298, 623, 322]]\n M11(NMOS)[[491, 324, 543, 378]]\n I1(CurrentSource)[[95, 341, 147, 392]]\n </step2>\n <step3>\n node1: [VDD, CE, M13.S, M9.S]\n node2: [CE, M9.G, Vb, M15.S]\n node3: [M13.G, M13.D, M14.S]\n node4: [M9.D, CC, Vout, CL, M11.D]\n node5: [CC, M15.D]\n node6: [M14.G, M14.D, M15.G, I1.-]\n node7: [CL, M11.S, I1.+, GND]\n node8: [M11.G, Vb2]\n </step3>\n </think>\n\n <answer>\n [Vb node2 0]\n [VDD node1 0]\n [Vb2 node8 0]\n [GND node7 0]\n [Vout node4 0]\n [CE node1 node2 Capacitor]\n [CC node5 node4 Capacitor]\n [CL node4 node7 Capacitor]\n [M9 node2 node4 node1 PMOS]\n [M13 node3 node3 node1 PMOS]\n [M14 node6 node6 node3 PMOS]\n [M15 node6 node5 node2 NMOS]\n [M11 node8 node4 node7 NMOS]\n [I1 node7 node6 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "071",
+    "image": "071.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 678,
+    "length": 528,
+    "answer": "<think>\n <step1>\n VDD(Port)[[153, 111, 541, 136]]\n GND(Port)[[161, 481, 192, 514], [479, 482, 509, 514]]\n Vin1(Port)[[89, 313, 104, 329]]\n Vin2(Port)[[566, 313, 582, 329]]\n </step1>\n <step2>\n I4(CurrentSource)[[470, 153, 518, 199]]\n I3(CurrentSource)[[153, 154, 200, 199]]\n M4(PMOS)[[389, 216, 437, 268]]\n M3(PMOS)[[234, 217, 281, 268]]\n M1(NMOS)[[133, 296, 181, 348]]\n M2(NMOS)[[490, 296, 539, 348]]\n RS(Resistor)[[313, 364, 349, 398]]\n I2(CurrentSource)[[470, 419, 518, 466]]\n I1(CurrentSource)[[153, 419, 200, 466]]\n </step2>\n <step3>\n node1: [VDD, I4.-, I3.-, M4.S, M3.S]\n node2: [I4.+, M4.G, M2.D]\n node3: [I3.+, M3.G, M1.D]\n node4: [M4.D, M2.S, RS, I2.-]\n node5: [M3.D, M1.S, RS, I1.-]\n node6: [M1.G, Vin1]\n node7: [M2.G, Vin2]\n node8: [I2.+, I1.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node8 0]\n [Vin1 node6 0]\n [Vin2 node7 0]\n [RS node5 node4 Resistor]\n [M4 node2 node4 node1 PMOS]\n [M3 node3 node5 node1 PMOS]\n [M1 node6 node3 node5 NMOS]\n [M2 node7 node2 node4 NMOS]\n [I4 node2 node1 CurrentSource]\n [I3 node3 node1 CurrentSource]\n [I2 node8 node4 CurrentSource]\n [I1 node8 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "072",
+    "image": "072.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 670,
+    "length": 716,
+    "answer": "<think>\n <step1>\n VDD(Port)[[46, 36, 546, 56]]\n GND(Port)[[63, 355, 104, 397], [337, 629, 380, 672], [399, 629, 442, 672]]\n 2(Port)[[592, 397, 620, 426]]\n 1(Port)[[157, 398, 181, 428]]\n </step1>\n <step2>\n M3(PMOS)[[203, 99, 272, 175]]\n M2(NMOS)[[506, 372, 576, 451]]\n M5(NMOS)[[295, 525, 363, 601]]\n M7(PMOS)[[79, 101, 147, 173]]\n M4(PMOS)[[448, 99, 519, 175]]\n M1(NMOS)[[203, 372, 273, 451]]\n M6(NMOS)[[415, 525, 484, 601]]\n I7(CurrentSource)[[48, 246, 119, 315]]\n </step2>\n <step3>\n node1: [M3.G, M7.G, M7.D, M4.G, I7.-]\n node2: [M3.D, M5.G, M1.D]\n node3: [M3.S, M7.S, M4.S, VDD]\n node4: [M2.G, 2]\n node5: [M2.D, M4.D, M6.G]\n node6: [M2.S, M5.D, M1.S, M6.D]\n node7: [M5.S, GND, M6.S, I7.+]\n node8: [M1.G, 1]\n </step3>\n </think>\n\n <answer>\n [M3 node1 node2 node3 PMOS]\n [M2 node4 node5 node6 NMOS]\n [M5 node2 node6 node7 NMOS]\n [M7 node1 node1 node3 PMOS]\n [GND node7 0]\n [M4 node1 node5 node3 PMOS]\n [M1 node8 node2 node6 NMOS]\n [M6 node5 node6 node7 NMOS]\n [I7 node7 node1 CurrentSource]\n [2 node4 0]\n [1 node8 0]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "073",
+    "image": "073.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1128,
+    "length": 596,
+    "answer": "<think>\n <step1>\n VDD(Port)[[318, 80, 891, 101]]\n GND(Port)[[327, 540, 373, 584], [597, 540, 641, 586], [836, 539, 881, 586], [957, 481, 1000, 527]]\n D(Port)[[70, 316, 93, 339]]\n CK(Port)[[250, 316, 271, 339], [520, 317, 539, 339]]\n Q(Port)[[1027, 317, 1049, 338]]\n </step1>\n <step2>\n M4(PMOS)[[556, 141, 624, 216]]\n M7(PMOS)[[796, 142, 865, 216]]\n M1(PMOS)[[289, 142, 357, 215]]\n M2(NMOS)[[286, 289, 357, 366]]\n M5(PMOS)[[555, 291, 625, 366]]\n CL(Capacitor)[[952, 404, 1005, 438]]\n M3(NMOS)[[284, 438, 356, 516]]\n M8(NMOS)[[796, 439, 865, 515]]\n M6(NMOS)[[555, 439, 625, 515]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M7.S, M1.S]\n node2: [M4.G, M1.D, M2.D]\n node3: [M4.D, M7.G, M5.S]\n node4: [M7.D, Q, CL, M8.D]\n node5: [M1.G, D, M3.G]\n node6: [M2.G, M5.G, CK]\n node7: [M2.S, M3.D, M6.G]\n node8: [M5.D, M8.G, M6.D]\n node9: [CL, M3.S, M8.S, M6.S, GND]\n </step3>\n </think>\n\n <answer>\n [D node5 0]\n [Q node4 0]\n [CK node6 0]\n [VDD node1 0]\n [GND node9 0]\n [CL node4 node9 Capacitor]\n [M4 node2 node3 node1 PMOS]\n [M7 node3 node4 node1 PMOS]\n [M1 node5 node2 node1 PMOS]\n [M2 node6 node2 node7 NMOS]\n [M5 node6 node8 node3 PMOS]\n [M3 node5 node7 node9 NMOS]\n [M8 node8 node4 node9 NMOS]\n [M6 node7 node8 node9 NMOS]\n  </answer>"
+  },
+  {
+    "id": "074",
+    "image": "074.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 946,
+    "length": 506,
+    "answer": "<think>\n <step1>\n VDD(Port)[[156, 39, 783, 59]]\n GND(Port)[[162, 460, 197, 495], [449, 460, 485, 495], [736, 460, 771, 495]]\n Vout1(Port)[[103, 289, 120, 307]]\n Vin(Port)[[286, 289, 302, 307], [286, 356, 302, 374]]\n Vb1(Port)[[287, 107, 303, 124], [654, 404, 670, 422], [263, 404, 279, 422]]\n Vout2(Port)[[814, 289, 831, 307]]\n </step1>\n <step2>\n M3(PMOS)[[338, 86, 389, 145]]\n M4(PMOS)[[499, 87, 551, 144]]\n M6(PMOS)[[706, 133, 758, 189]]\n M5(PMOS)[[177, 133, 229, 189]]\n M1(NMOS)[[337, 269, 390, 328]]\n M2(NMOS)[[543, 270, 596, 326]]\n ISS(CurrentSource)[[439, 381, 495, 433]]\n M8(NMOS)[[703, 382, 759, 440]]\n M7(NMOS)[[175, 382, 231, 441]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S, M6.S, M5.S]\n node2: [M3.G, M4.G, Vb1, M8.G, M7.G]\n node3: [M3.D, M5.G, M1.D]\n node4: [M4.D, M6.G, M2.D]\n node5: [M6.D, Vout2, M8.D]\n node6: [M5.D, Vout1, M7.D]\n node7: [M1.G, M2.G, Vin]\n node8: [M1.S, M2.S, ISS.-]\n node9: [ISS.+, M8.S, M7.S, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [Vb1 node2 0]\n [Vin node7 0]\n [GND node9 0]\n [Vout2 node5 0]\n [Vout1 node6 0]\n [M3 node2 node3 node1 PMOS]\n [M4 node2 node4 node1 PMOS]\n [M6 node4 node5 node1 PMOS]\n [M5 node3 node6 node1 PMOS]\n [M1 node7 node3 node8 NMOS]\n [M2 node7 node4 node8 NMOS]\n [M8 node2 node5 node9 NMOS]\n [M7 node2 node6 node9 NMOS]\n [ISS node9 node8 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "075",
+    "image": "075.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1622,
+    "length": 582,
+    "answer": "<think>\n <step1>\n VDD(Port)[[204, 62, 1354, 85]]\n GND(Port)[[557, 523, 597, 565], [930, 524, 970, 565]]\n A(Port)[[118, 324, 137, 344]]\n B(Port)[[356, 324, 377, 344]]\n Vb(Port)[[753, 380, 776, 399]]\n Vout(Port)[[834, 219, 855, 239]]\n C(Port)[[1151, 323, 1174, 345]]\n D(Port)[[1418, 324, 1439, 345]]\n </step1>\n <step2>\n RD(Resistor)[[740, 127, 786, 179]]\n M6(NMOS)[[786, 303, 851, 370]]\n M1(NMOS)[[175, 303, 241, 369]]\n M5(NMOS)[[1050, 303, 1115, 370]]\n M3(NMOS)[[677, 303, 742, 370]]\n M2(NMOS)[[414, 304, 481, 369]]\n M4(NMOS)[[1317, 304, 1382, 369]]\n ISS2(CurrentSource)[[919, 441, 982, 504]]\n ISS1(CurrentSource)[[547, 442, 612, 504]]\n </step2>\n <step3>\n node1: [VDD, RD, M1.D, M5.D, M2.D, M4.D]\n node2: [RD, Vout, M6.D, M3.D]\n node3: [M6.G, M3.G, Vb]\n node4: [M6.S, M5.S, M4.S, ISS2.-]\n node5: [M1.G, A]\n node6: [M1.S, M3.S, M2.S, ISS1.-]\n node7: [M5.G, C]\n node8: [M2.G, B]\n node9: [M4.G, D]\n node10: [ISS2.+, ISS1.+, GND]\n </step3>\n </think>\n\n <answer>\n [C node7 0]\n [D node9 0]\n [A node5 0]\n [B node8 0]\n [Vb node3 0]\n [VDD node1 0]\n [Vout node2 0]\n [GND node10 0]\n [RD node1 node2 Resistor]\n [M6 node3 node2 node4 NMOS]\n [M1 node5 node1 node6 NMOS]\n [M5 node7 node1 node4 NMOS]\n [M3 node3 node2 node6 NMOS]\n [M2 node8 node1 node6 NMOS]\n [M4 node9 node1 node4 NMOS]\n [ISS2 node10 node4 CurrentSource]\n [ISS1 node10 node6 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "076",
+    "image": "076.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1622,
+    "length": 582,
+    "answer": "<think>\n <step1>\n VDD(Port)[[204, 62, 1355, 85]]\n GND(Port)[[557, 523, 597, 565], [930, 524, 970, 565]]\n Anot(Port)[[1418, 326, 1439, 348]]\n A(Port)[[118, 324, 137, 344]]\n Bnot(Port)[[1151, 323, 1174, 345]]\n B(Port)[[356, 324, 377, 344]]\n Vb(Port)[[753, 380, 776, 399]]\n Vout(Port)[[834, 219, 855, 239]]\n </step1>\n <step2>\n M1(NMOS)[[175, 303, 241, 369]]\n ISS2(CurrentSource)[[919, 441, 982, 504]]\n M5(NMOS)[[1051, 303, 1114, 370]]\n ISS1(CurrentSource)[[547, 442, 612, 504]]\n M6(NMOS)[[786, 303, 851, 370]]\n M2(NMOS)[[414, 304, 481, 369]]\n M4(NMOS)[[1316, 304, 1380, 369]]\n M3(NMOS)[[677, 303, 742, 370]]\n RD(Resistor)[[740, 127, 786, 179]]\n </step2>\n <step3>\n node1: [M1.G, A]\n node2: [M1.D, M5.D, M2.D, M4.D, RD, VDD]\n node3: [M1.S, ISS1.-, M2.S, M3.S]\n node4: [ISS2.+, ISS1.+, GND]\n node5: [ISS2.-, M5.S, M6.S, M4.S]\n node6: [M5.G, Bnot]\n node7: [M6.G, M3.G, Vb]\n node8: [M6.D, M3.D, RD, Vout]\n node9: [M2.G, B]\n node10: [M4.G, Anot]\n </step3>\n </think>\n\n <answer>\n [GND node4 0]\n [Anot node10 0]\n [A node1 0]\n [Bnot node6 0]\n [B node9 0]\n [VDD node2 0]\n [Vb node7 0]\n [Vout node8 0]\n [M1 node1 node2 node3 NMOS]\n [ISS2 node4 node5 CurrentSource]\n [M5 node6 node2 node5 NMOS]\n [ISS1 node4 node3 CurrentSource]\n [M6 node7 node8 node5 NMOS]\n [M2 node9 node2 node3 NMOS]\n [M4 node10 node2 node5 NMOS]\n [M3 node7 node8 node3 NMOS]\n [RD node2 node8 Resistor]\n  </answer>"
+  },
+  {
+    "id": "077",
+    "image": "077.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 644,
+    "length": 492,
+    "answer": "<think>\n <step1>\n VDD(Port)[[124, 38, 402, 52]]\n GND(Port)[[137, 265, 167, 299], [222, 442, 255, 475], [355, 376, 386, 408], [464, 376, 496, 408]]\n Vout(Port)[[538, 254, 555, 271]]\n </step1>\n <step2>\n Mp1(PMOS)[[325, 83, 376, 139]]\n Mp2(PMOS)[[148, 83, 198, 139]]\n CL(Capacitor)[[461, 320, 499, 344]]\n aIin(CurrentSource)[[127, 189, 179, 241]]\n Mout(NMOS)[[323, 302, 375, 358]]\n Iin(CurrentSource)[[213, 364, 266, 416]]\n CF(Capacitor)[[286, 243, 311, 283]]\n </step2>\n <step3>\n node1: [Mp1.G, Mp2.G, Mp2.D, aIin.-]\n node2: [Mp1.D, CL, Mout.D, CF, Vout]\n node3: [Mp1.S, Mp2.S, VDD]\n node4: [CL, GND, aIin.+, Mout.S, Iin.+]\n node5: [Mout.G, Iin.-, CF]\n </step3>\n </think>\n\n <answer>\n [GND node4 0]\n [Vout node2 0]\n [VDD node3 0]\n [Mp1 node1 node2 node3 PMOS]\n [Mp2 node1 node1 node3 PMOS]\n [CL node2 node4 Capacitor]\n [aIin node4 node1 CurrentSource]\n [Mout node5 node2 node4 NMOS]\n [Iin node4 node5 CurrentSource]\n [CF node5 node2 Capacitor]\n  </answer>"
+  },
+  {
+    "id": "078",
+    "image": "078.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 908,
+    "length": 716,
+    "answer": "<think>\n <step1>\n VDD(Port)[[286, 37, 690, 55]]\n GND(Port)[[84, 474, 127, 519], [297, 383, 341, 428], [634, 627, 676, 672]]\n Vout(Port)[[735, 458, 758, 482]]\n </step1>\n <step2>\n Iin(CurrentSource)[[70, 368, 141, 437]]\n M1(NMOS)[[256, 281, 324, 357]]\n RF(Resistor)[[296, 446, 350, 494]]\n M2(NMOS)[[590, 189, 662, 264]]\n CGS2(Capacitor)[[507, 273, 561, 309]]\n RD(Resistor)[[295, 106, 345, 165]]\n ID(CurrentSource)[[620, 518, 691, 589]]\n </step2>\n <step3>\n node1: [GND, Iin.-, M1.S, ID.+]\n node2: [Iin.+, M1.G, RF]\n node3: [M1.D, M2.G, CGS2, RD]\n node4: [RF, M2.S, CGS2, ID.-, Vout]\n node5: [M2.D, RD, VDD]\n </step3>\n </think>\n\n <answer>\n [GND node1 0]\n [Iin node2 node1 VoltageSource]\n [M1 node2 node3 node1 NMOS]\n [RF node2 node4 Resistor]\n [M2 node3 node5 node4 NMOS]\n [CGS2 node3 node4 Capacitor]\n [RD node5 node3 Resistor]\n [ID node1 node4 CurrentSource]\n [Vout node4 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "079",
+    "image": "079.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 868,
+    "length": 500,
+    "answer": "<think>\n <step1>\n VDD(Port)[[539, 82, 758, 100]]\n GND(Port)[[629, 459, 661, 491]]\n Vcont(Port)[[78, 232, 93, 250]]\n Vb(Port)[[400, 427, 416, 444]]\n </step1>\n <step2>\n L1(Inductor)[[536, 112, 581, 179]]\n M1(NMOS)[[555, 279, 605, 334]]\n L2(Inductor)[[709, 112, 752, 179]]\n ISS(CurrentSource)[[621, 384, 670, 434]]\n M2(NMOS)[[685, 279, 735, 335]]\n MV1(NMOS)[[169, 171, 217, 225]]\n MV2(NMOS)[[168, 279, 218, 334]]\n CS2(Capacitor)[[433, 244, 459, 284]]\n R2(Resistor)[[347, 353, 385, 393]]\n R1(Resistor)[[304, 353, 342, 393]]\n CS1(Capacitor)[[433, 201, 458, 240]]\n </step2>\n <step3>\n node1: [L1, L2, VDD]\n node2: [L1, M1.D, M2.G, CS2]\n node3: [M1.G, L2, M2.D, CS1]\n node4: [M1.S, ISS.-, M2.S]\n node5: [ISS.+, GND]\n node6: [MV1.G, R1, CS1]\n node7: [MV1.D, MV1.S, MV2.D, MV2.S, Vcont]\n node8: [MV2.G, CS2, R2]\n node9: [R2, R1, Vb]\n </step3>\n </think>\n\n <answer>\n [L1 node1 node2 Inductor]\n [M1 node3 node2 node4 NMOS]\n [L2 node1 node3 Inductor]\n [ISS node5 node4 CurrentSource]\n [M2 node2 node3 node4 NMOS]\n [MV1 node6 node7 node7 NMOS]\n [GND node5 0]\n [MV2 node8 node7 node7 NMOS]\n [CS2 node8 node2 Capacitor]\n [R2 node8 node9 Resistor]\n [R1 node6 node9 Resistor]\n [CS1 node6 node3 Capacitor]\n [Vcont node7 0]\n [Vb node9 0]\n [VDD node1 0]\n  </answer>"
+  },
+  {
+    "id": "080",
+    "image": "080.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 978,
+    "length": 684,
+    "answer": "<think>\n <step1>\n VDD(Port)[[242, 32, 623, 51]]\n GND(Port)[[411, 622, 453, 666], [715, 532, 759, 576]]\n Vin(Port)[[116, 391, 138, 415]]\n Vout(Port)[[818, 239, 838, 263]]\n </step1>\n <step2>\n ISS(CurrentSource)[[399, 516, 468, 585]]\n M4(PMOS)[[522, 92, 593, 168]]\n C2(Capacitor)[[711, 452, 764, 485]]\n M3(PMOS)[[274, 92, 343, 168]]\n C1(Capacitor)[[711, 330, 763, 364]]\n M1(NMOS)[[213, 365, 287, 442]]\n M2(NMOS)[[578, 367, 649, 441]]\n </step2>\n <step3>\n node1: [ISS.+, GND, C2]\n node2: [ISS.-, M1.S, M2.S]\n node3: [M4.G, M3.G, M3.D, M1.D]\n node4: [M4.D, C1, M2.D, Vout]\n node5: [M4.S, M3.S, VDD]\n node6: [C2, C1, M2.G]\n node7: [M1.G, Vin]\n </step3>\n </think>\n\n <answer>\n [ISS node1 node2 CurrentSource]\n [M4 node3 node4 node5 PMOS]\n [GND node1 0]\n [C2 node6 node1 Capacitor]\n [M3 node3 node3 node5 PMOS]\n [C1 node4 node6 Capacitor]\n [M1 node7 node3 node2 NMOS]\n [M2 node6 node4 node2 NMOS]\n [Vin node7 0]\n [Vout node4 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "081",
+    "image": "081.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 948,
+    "length": 692,
+    "answer": "<think>\n <step1>\n VDD(Port)[[247, 32, 620, 54]]\n GND(Port)[[411, 622, 454, 667], [716, 531, 761, 576]]\n Vout(Port)[[818, 242, 840, 264]]\n Vin(Port)[[117, 394, 140, 417]]\n </step1>\n <step2>\n ISS(CurrentSource)[[398, 515, 467, 584]]\n M4(PMOS)[[523, 94, 593, 170]]\n M3(PMOS)[[274, 93, 344, 169]]\n C2(Capacitor)[[711, 452, 764, 485]]\n M1(NMOS)[[215, 368, 286, 443]]\n C1(Capacitor)[[713, 333, 764, 366]]\n M2(NMOS)[[580, 369, 651, 442]]\n </step2>\n <step3>\n node1: [ISS.+, GND, C2]\n node2: [ISS.-, M1.S, M2.S]\n node3: [M4.G, M3.G, M3.D, M1.D]\n node4: [M4.D, C1, M2.D, Vout]\n node5: [M4.S, M3.S, VDD]\n node6: [C2, C1, M2.G]\n node7: [M1.G, Vin]\n </step3>\n </think>\n\n <answer>\n [ISS node1 node2 CurrentSource]\n [GND node1 0]\n [M4 node3 node4 node5 PMOS]\n [M3 node3 node3 node5 PMOS]\n [C2 node6 node1 Capacitor]\n [M1 node7 node3 node2 NMOS]\n [C1 node4 node6 Capacitor]\n [M2 node6 node4 node2 NMOS]\n [Vout node4 0]\n [Vin node7 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "082",
+    "image": "082.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 498,
+    "length": 364,
+    "answer": "<think>\n <step1>\n VDD(Port)[[129, 18, 355, 33]]\n GND(Port)[[228, 334, 256, 362]]\n Vin1(Port)[[68, 199, 83, 215]]\n Vout(Port)[[381, 144, 395, 158]]\n Vin2(Port)[[401, 199, 414, 215]]\n </step1>\n <step2>\n M4(PMOS)[[295, 56, 338, 102]]\n M3(PMOS)[[146, 57, 187, 102]]\n R1(Resistor)[[189, 154, 221, 188]]\n M2(NMOS)[[329, 183, 373, 231]]\n M1(NMOS)[[109, 183, 153, 231]]\n ISS(CurrentSource)[[220, 269, 264, 312]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M3.S]\n node2: [M4.G, M3.G, M3.D, R1, M1.D]\n node3: [M4.D, Vout, M2.D]\n node4: [R1, M2.S, M1.S, ISS.-]\n node5: [M2.G, Vin2]\n node6: [M1.G, Vin1]\n node7: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node7 0]\n [Vout node3 0]\n [Vin1 node6 0]\n [Vin2 node5 0]\n [R1 node2 node4 Resistor]\n [M4 node2 node3 node1 PMOS]\n [M3 node2 node2 node1 PMOS]\n [M2 node5 node3 node4 NMOS]\n [M1 node6 node2 node4 NMOS]\n [ISS node7 node4 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "083",
+    "image": "083.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 628,
+    "length": 762,
+    "answer": "<think>\n <step1>\n VDD(Port)[[337, 39, 407, 62]]\n GND(Port)[[44, 120, 91, 165], [349, 689, 395, 733]]\n Vb(Port)[[75, 482, 97, 505]]\n Vin(Port)[[232, 610, 255, 634]]\n Vout(Port)[[456, 386, 479, 410]]\n </step1>\n <step2>\n M3(PMOS)[[306, 104, 377, 181]]\n C2(Capacitor)[[130, 114, 166, 171]]\n R2(Resistor)[[252, 245, 309, 296]]\n C1(Capacitor)[[290, 370, 325, 426]]\n M2(NMOS)[[304, 453, 379, 534]]\n R1(Resistor)[[147, 468, 206, 518]]\n M1(NMOS)[[303, 580, 379, 662]]\n </step2>\n <step3>\n node1: [VDD, M3.S]\n node2: [M3.G, C2, R2]\n node3: [M3.D, R2, C1, Vout, M2.D]\n node4: [C2, GND, M1.S]\n node5: [C1, M2.G, R1]\n node6: [M2.S, M1.D]\n node7: [R1, Vb]\n node8: [M1.G, Vin]\n </step3>\n </think>\n\n <answer>\n [Vb node7 0]\n [VDD node1 0]\n [GND node4 0]\n [Vin node8 0]\n [Vout node3 0]\n [R2 node2 node3 Resistor]\n [R1 node7 node5 Resistor]\n [C2 node4 node2 Capacitor]\n [C1 node5 node3 Capacitor]\n [M3 node2 node3 node1 PMOS]\n [M2 node5 node3 node6 NMOS]\n [M1 node8 node6 node4 NMOS]\n  </answer>"
+  },
+  {
+    "id": "084",
+    "image": "084.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 786,
+    "length": 738,
+    "answer": "<think>\n <step1>\n VDD(Port)[[242, 39, 544, 57]]\n GND(Port)[[370, 658, 416, 702]]\n Vin1(Port)[[139, 399, 161, 423]]\n Vb(Port)[[260, 552, 283, 574]]\n Vout1(Port)[[321, 218, 343, 239]]\n Vout2(Port)[[443, 218, 464, 239]]\n Vin2(Port)[[625, 399, 649, 421]]\n </step1>\n <step2>\n M3(PMOS)[[209, 99, 280, 175]]\n M4(PMOS)[[510, 100, 578, 174]]\n R1(Resistor)[[372, 264, 426, 313]]\n M1(NMOS)[[205, 373, 277, 449]]\n M2(NMOS)[[512, 374, 582, 448]]\n M5(NMOS)[[330, 526, 401, 600]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M3.D, Vout2, Vout1, R1, M1.D]\n node3: [M4.G, M4.D, R1, M2.D]\n node4: [M1.G, Vin1]\n node5: [M1.S, M2.S, M5.D]\n node6: [M2.G, Vin2]\n node7: [M5.G, Vb]\n node8: [M5.S, GND]\n </step3>\n </think>\n\n <answer>\n [Vb node7 0]\n [VDD node1 0]\n [GND node8 0]\n [Vin2 node6 0]\n [Vin1 node4 0]\n [Vout2 node2 0]\n [Vout1 node2 0]\n [R1 node2 node3 Resistor]\n [M3 node2 node2 node1 PMOS]\n [M4 node3 node3 node1 PMOS]\n [M1 node4 node2 node5 NMOS]\n [M2 node6 node3 node5 NMOS]\n [M5 node7 node5 node8 NMOS]\n  </answer>"
+  },
+  {
+    "id": "085",
+    "image": "085.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 944,
+    "length": 762,
+    "answer": "<think>\n <step1>\n VDD(Port)[[73, 36, 808, 59]]\n GND(Port)[[400, 686, 447, 731]]\n V1(Port)[[125, 446, 149, 470]]\n V3(Port)[[350, 255, 372, 279]]\n V4(Port)[[477, 255, 499, 279]]\n V2(Port)[[711, 448, 734, 472]]\n </step1>\n <step2>\n C1(Capacitor)[[78, 93, 134, 127]]\n C2(Capacitor)[[717, 93, 773, 127]]\n M3(PMOS)[[198, 133, 270, 211]]\n M4(PMOS)[[579, 133, 650, 211]]\n R1(Resistor)[[146, 242, 203, 293]]\n R2(Resistor)[[643, 242, 699, 293]]\n M1(NMOS)[[197, 418, 273, 498]]\n M2(NMOS)[[577, 418, 655, 498]]\n ISS(CurrentSource)[[389, 574, 462, 646]]\n </step2>\n <step3>\n node1: [VDD, C1, C2, M3.S, M4.S]\n node2: [C1, M3.G, R1]\n node3: [C2, M4.G, R2]\n node4: [M3.D, R1, V3, M1.D]\n node5: [M4.D, R2, V4, M2.D]\n node6: [M1.G, V1]\n node7: [M1.S, M2.S, ISS.-]\n node8: [M2.G, V2]\n node9: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [V4 node5 0]\n [V3 node4 0]\n [V1 node6 0]\n [V2 node8 0]\n [VDD node1 0]\n [GND node9 0]\n [R1 node2 node4 Resistor]\n [R2 node5 node3 Resistor]\n [C1 node1 node2 Capacitor]\n [C2 node1 node3 Capacitor]\n [M3 node2 node4 node1 PMOS]\n [M4 node3 node5 node1 PMOS]\n [M1 node6 node4 node7 NMOS]\n [M2 node8 node5 node7 NMOS]\n [ISS node9 node7 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "086",
+    "image": "086.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1100,
+    "length": 816,
+    "answer": "<think>\n <step1>\n VDD(Port)[[173, 37, 907, 58]]\n GND(Port)[[183, 721, 230, 767], [519, 570, 564, 616], [854, 720, 897, 767]]\n Vout1(Port)[[133, 461, 155, 483]]\n +(Port)[[286, 338, 308, 361]]\n -(Port)[[286, 430, 309, 454]]\n Vout2(Port)[[927, 461, 950, 483]]\n </step1>\n <step2>\n M4(PMOS)[[599, 102, 668, 177]]\n M3(PMOS)[[416, 103, 482, 176]]\n M5(PMOS)[[200, 193, 270, 267]]\n M6(PMOS)[[813, 194, 884, 270]]\n R2(Resistor)[[581, 205, 634, 254]]\n R1(Resistor)[[456, 205, 512, 255]]\n M2(NMOS)[[658, 314, 727, 389]]\n M1(NMOS)[[354, 315, 424, 389]]\n ISS(CurrentSource)[[506, 461, 577, 532]]\n R4(Resistor)[[700, 572, 757, 621]]\n R3(Resistor)[[334, 573, 390, 621]]\n M8(NMOS)[[814, 618, 883, 697]]\n M7(NMOS)[[200, 619, 270, 697]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M3.S, M5.S, M6.S]\n node2: [M4.G, M3.G, R2, R1]\n node3: [M4.D, M6.G, R2, M2.D]\n node4: [M3.D, M5.G, R1, M1.D]\n node5: [M5.D, Vout1, R3, M7.D]\n node6: [M6.D, Vout2, R4, M8.D]\n node7: [M2.G, -]\n node8: [M2.S, M1.S, ISS.-]\n node9: [M1.G, +]\n node10: [ISS.+, GND, M8.S, M7.S]\n node11: [R4, R3, M8.G, M7.G]\n </step3>\n </think>\n\n <answer>\n [+ node9 0]\n [- node7 0]\n [VDD node1 0]\n [GND node10 0]\n [Vout2 node6 0]\n [Vout1 node5 0]\n [R2 node2 node3 Resistor]\n [R1 node4 node2 Resistor]\n [R4 node11 node6 Resistor]\n [R3 node5 node11 Resistor]\n [M4 node2 node3 node1 PMOS]\n [M3 node2 node4 node1 PMOS]\n [M5 node4 node5 node1 PMOS]\n [M6 node3 node6 node1 PMOS]\n [M2 node7 node3 node8 NMOS]\n [M1 node9 node4 node8 NMOS]\n [M8 node11 node6 node10 NMOS]\n [M7 node11 node5 node10 NMOS]\n [ISS node10 node8 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "087",
+    "image": "087.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 756,
+    "length": 760,
+    "answer": "<think>\n <step1>\n VDD(Port)[[151, 59, 545, 81]]\n GND(Port)[[324, 423, 367, 468], [325, 677, 369, 723]]\n Vout(Port)[[589, 312, 613, 336]]\n V2(Port)[[622, 436, 644, 461]]\n V1(Port)[[46, 436, 70, 461]]\n </step1>\n <step2>\n M4(PMOS)[[439, 124, 513, 202]]\n M1(NMOS)[[117, 411, 193, 489]]\n M3(PMOS)[[182, 124, 254, 203]]\n M2(NMOS)[[499, 409, 575, 489]]\n ISS(CurrentSource)[[311, 566, 383, 639]]\n R1(Resistor)[[227, 231, 283, 286]]\n I1(VoltageSource)[[311, 310, 383, 383]]\n </step2>\n <step3>\n node1: [M4.G, M3.G, R1, I1.-]\n node2: [M4.D, M2.D, Vout]\n node3: [M4.S, M3.S, VDD]\n node4: [GND, ISS.+, I1.+]\n node5: [M1.G, V1]\n node6: [M1.D, M3.D, R1]\n node7: [M1.S, M2.S, ISS.-]\n node8: [M2.G, V2]\n </step3>\n </think>\n\n <answer>\n [M4 node1 node2 node3 PMOS]\n [GND node4 0]\n [M1 node5 node6 node7 NMOS]\n [M3 node1 node6 node3 PMOS]\n [M2 node8 node2 node7 NMOS]\n [ISS node4 node7 CurrentSource]\n [Vout node2 0]\n [R1 node6 node1 Resistor]\n [V2 node8 0]\n [V1 node5 0]\n [I1 node4 node1 VoltageSource]\n [VDD node3 0]\n  </answer>"
+  },
+  {
+    "id": "088",
+    "image": "088.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1202,
+    "length": 428,
+    "answer": "<think>\n <step1>\n GND(Port)[[119, 360, 161, 407], [363, 361, 405, 406], [574, 361, 618, 406], [789, 360, 832, 406], [942, 361, 983, 406]]\n Vout(Port)[[1043, 193, 1066, 216]]\n </step1>\n <step2>\n Vin(VoltageSource)[[105, 265, 176, 336]]\n I(CurrentSource)[[560, 254, 633, 325]]\n Cin(Capacitor)[[358, 284, 410, 317]]\n CL(Capacitor)[[937, 283, 990, 318]]\n R0(Resistor)[[787, 272, 834, 328]]\n C1(Capacitor)[[236, 180, 270, 233]]\n C2(Capacitor)[[480, 87, 514, 140]]\n </step2>\n <step3>\n node1: [Vin.+, C1]\n node2: [Vin.-, I.+, GND, Cin, CL, R0]\n node3: [I.-, CL, R0, C2, Vout]\n node4: [Cin, C1, C2]\n </step3>\n </think>\n\n <answer>\n [Vin node1 node2 VoltageSource]\n [I node2 node3 CurrentSource]\n [GND node2 0]\n [Cin node4 node2 Capacitor]\n [CL node3 node2 Capacitor]\n [R0 node3 node2 Resistor]\n [C1 node1 node4 Capacitor]\n [C2 node4 node3 Capacitor]\n [Vout node3 0]\n  </answer>"
+  },
+  {
+    "id": "089",
+    "image": "089.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1126,
+    "length": 880,
+    "answer": "<think>\n <step1>\n VDD(Port)[[75, 48, 922, 67]]\n GND(Port)[[94, 760, 143, 807], [477, 600, 523, 648], [859, 760, 906, 807]]\n +(Port)[[201, 362, 223, 385]]\n Vout(Port)[[966, 489, 988, 511]]\n Vb(Port)[[488, 202, 511, 226]]\n -(Port)[[201, 458, 224, 481]]\n </step1>\n <step2>\n M2(NMOS)[[654, 334, 728, 413]]\n M4(PMOS)[[593, 112, 664, 190]]\n M6(PMOS)[[816, 209, 889, 286]]\n M3(PMOS)[[336, 112, 407, 190]]\n ISS(CurrentSource)[[463, 488, 537, 562]]\n M1(NMOS)[[273, 335, 346, 412]]\n M7(NMOS)[[109, 652, 186, 734]]\n M5(PMOS)[[112, 209, 185, 286]]\n M8(NMOS)[[813, 651, 892, 735]]\n </step2>\n <step3>\n node1: [M2.G, -]\n node2: [M2.D, M4.D, M6.G]\n node3: [M2.S, ISS.-, M1.S]\n node4: [M4.G, M3.G, Vb]\n node5: [M4.S, M6.S, M3.S, M5.S, VDD]\n node6: [M6.D, M8.D, Vout]\n node7: [M3.D, M1.D, M5.G]\n node8: [ISS.+, M7.S, M8.S, GND]\n node9: [M1.G, +]\n node10: [M7.G, M7.D, M5.D, M8.G]\n </step3>\n </think>\n\n <answer>\n [M2 node1 node2 node3 NMOS]\n [M4 node4 node2 node5 PMOS]\n [M6 node2 node6 node5 PMOS]\n [M3 node4 node7 node5 PMOS]\n [ISS node8 node3 CurrentSource]\n [M1 node9 node7 node3 NMOS]\n [M7 node10 node10 node8 NMOS]\n [M5 node7 node10 node5 PMOS]\n [M8 node10 node6 node8 NMOS]\n [GND node8 0]\n [+ node9 0]\n [Vout node6 0]\n [Vb node4 0]\n [- node1 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "090",
+    "image": "090.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1039,
+    "length": 690,
+    "answer": "<think>\n <step1>\n VDD(Port)[[191, 36, 573, 58]]\n GND(Port)[[359, 619, 407, 667], [794, 430, 839, 476]]\n Vin(Port)[[85, 350, 108, 374]]\n V1(Port)[[657, 349, 683, 374]]\n Vout(Port)[[899, 255, 923, 279]]\n </step1>\n <step2>\n M3(PMOS)[[218, 99, 290, 177]]\n M4(PMOS)[[476, 101, 550, 179]]\n M2(NMOS)[[537, 322, 613, 401]]\n M1(NMOS)[[156, 322, 231, 402]]\n CL(Capacitor)[[789, 349, 843, 383]]\n ISS(CurrentSource)[[347, 509, 420, 582]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M3.D, M4.G, M1.D]\n node3: [M4.D, Vout, M2.D, CL]\n node4: [M2.G, V1]\n node5: [M2.S, M1.S, ISS.-]\n node6: [M1.G, Vin]\n node7: [CL, GND, ISS.+]\n </step3>\n </think>\n\n <answer>\n [V1 node4 0]\n [VDD node1 0]\n [Vin node6 0]\n [GND node7 0]\n [Vout node3 0]\n [CL node3 node7 Capacitor]\n [M3 node2 node2 node1 PMOS]\n [M4 node2 node3 node1 PMOS]\n [M2 node4 node3 node5 NMOS]\n [M1 node6 node2 node5 NMOS]\n [ISS node7 node5 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "091",
+    "image": "091.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 872,
+    "length": 792,
+    "answer": "<think>\n <step1>\n VDD(Port)[[288, 38, 671, 60]]\n GND(Port)[[458, 719, 504, 765]]\n VinCM(Port)[[182, 415, 205, 440]]\n Vout(Port)[[724, 289, 747, 311]]\n </step1>\n <step2>\n M4(PMOS)[[574, 102, 647, 181]]\n M3(PMOS)[[316, 102, 388, 181]]\n M1(NMOS)[[254, 389, 326, 466]]\n M2(NMOS)[[574, 389, 647, 469]]\n RSS(Resistor)[[456, 593, 506, 652]]\n </step2>\n <step3>\n node1: [VDD, M4.S, M3.S]\n node2: [M4.G, M4.D, M3.G, M3.D, Vout, M1.D, M2.D]\n node3: [M1.G, M2.G, VinCM]\n node4: [M1.S, M2.S, RSS]\n node5: [RSS, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node5 0]\n [Vout node2 0]\n [VinCM node3 0]\n [RSS node4 node5 Resistor]\n [M4 node2 node2 node1 PMOS]\n [M3 node2 node2 node1 PMOS]\n [M1 node3 node2 node4 NMOS]\n [M2 node3 node2 node4 NMOS]\n  </answer>"
+  },
+  {
+    "id": "092",
+    "image": "092.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 806,
+    "length": 740,
+    "answer": "<think>\n <step1>\n VDD(Port)[[231, 130, 483, 153]]\n GND(Port)[[334, 661, 376, 705], [575, 555, 621, 600]]\n Vin(Port)[[128, 432, 150, 455]]\n Vout(Port)[[680, 279, 701, 302]]\n </step1>\n <step2>\n M2(NMOS)[[441, 407, 510, 482]]\n M3(PMOS)[[257, 194, 326, 270]]\n M1(NMOS)[[198, 406, 270, 483]]\n M4(PMOS)[[384, 195, 453, 269]]\n IS(CurrentSource)[[319, 554, 388, 624]]\n R2(Resistor)[[575, 479, 621, 535]]\n R1(Resistor)[[574, 327, 622, 383]]\n </step2>\n <step3>\n node1: [M2.G, R2, R1]\n node2: [M2.D, M4.D, R1, Vout]\n node3: [M2.S, M1.S, IS.-]\n node4: [M3.G, M3.D, M1.D, M4.G]\n node5: [M3.S, M4.S, VDD]\n node6: [M1.G, Vin]\n node7: [GND, IS.+, R2]\n </step3>\n </think>\n\n <answer>\n [M2 node1 node2 node3 NMOS]\n [M3 node4 node4 node5 PMOS]\n [M1 node6 node4 node3 NMOS]\n [M4 node4 node2 node5 PMOS]\n [GND node7 0]\n [IS node7 node3 CurrentSource]\n [R2 node1 node7 Resistor]\n [R1 node2 node1 Resistor]\n [Vin node6 0]\n [Vout node2 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "093",
+    "image": "093.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 876,
+    "length": 754,
+    "answer": "<think>\n <step1>\n VDD(Port)[[82, 52, 755, 69]]\n GND(Port)[[393, 672, 440, 717]]\n Vin1(Port)[[133, 415, 155, 438]]\n Vout1(Port)[[158, 322, 179, 345]]\n Vb1(Port)[[284, 565, 307, 589]]\n Vout2(Port)[[660, 320, 682, 340]]\n Vin2(Port)[[680, 414, 704, 438]]\n </step1>\n <step2>\n M6(PMOS)[[628, 114, 696, 190]]\n M5(PMOS)[[142, 115, 209, 190]]\n M3(PMOS)[[264, 116, 329, 188]]\n M4(PMOS)[[508, 116, 575, 188]]\n M1(NMOS)[[201, 386, 272, 461]]\n M2(NMOS)[[566, 388, 637, 463]]\n M7(NMOS)[[352, 540, 425, 614]]\n </step2>\n <step3>\n node1: [VDD, M6.S, M5.S, M3.S, M4.S]\n node2: [M6.G, M6.D, M3.G, M4.D, Vout2, M2.D]\n node3: [M5.G, M5.D, M3.D, M4.G, Vout1, M1.D]\n node4: [M1.G, Vin1]\n node5: [M1.S, M2.S, M7.D]\n node6: [M2.G, Vin2]\n node7: [M7.G, Vb1]\n node8: [M7.S, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [Vb1 node7 0]\n [GND node8 0]\n [Vin2 node6 0]\n [Vin1 node4 0]\n [Vout2 node2 0]\n [Vout1 node3 0]\n [M6 node2 node2 node1 PMOS]\n [M5 node3 node3 node1 PMOS]\n [M3 node2 node3 node1 PMOS]\n [M4 node3 node2 node1 PMOS]\n [M1 node4 node3 node5 NMOS]\n [M2 node6 node2 node5 NMOS]\n [M7 node7 node5 node8 NMOS]\n  </answer>"
+  },
+  {
+    "id": "094",
+    "image": "094.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 664,
+    "length": 514,
+    "answer": "<think>\n <step1>\n VDD(Port)[[224, 42, 520, 57]]\n GND(Port)[[83, 356, 113, 389], [236, 290, 268, 322], [478, 466, 510, 500]]\n Vout(Port)[[552, 344, 569, 361]]\n </step1>\n <step2>\n Iin(CurrentSource)[[73, 279, 124, 329]]\n I1(CurrentSource)[[469, 388, 520, 439]]\n M1(NMOS)[[205, 217, 257, 273]]\n CGS2(Capacitor)[[388, 213, 427, 237]]\n RF(Resistor)[[235, 336, 274, 373]]\n M2(NMOS)[[448, 150, 498, 205]]\n RD(Resistor)[[232, 93, 271, 137]]\n </step2>\n <step3>\n node1: [Iin.+, M1.G, RF]\n node2: [Iin.-, I1.+, GND, M1.S]\n node3: [I1.-, CGS2, RF, M2.S, Vout]\n node4: [M1.D, CGS2, M2.G, RD]\n node5: [M2.D, RD, VDD]\n </step3>\n </think>\n\n <answer>\n [Iin node1 node2 CurrentSource]\n [I1 node2 node3 CurrentSource]\n [GND node2 0]\n [M1 node1 node4 node2 NMOS]\n [CGS2 node4 node3 Capacitor]\n [RF node1 node3 Resistor]\n [M2 node4 node5 node3 NMOS]\n [RD node5 node4 Resistor]\n [Vout node3 0]\n [VDD node5 0]\n  </answer>"
+  },
+  {
+    "id": "095",
+    "image": "095.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 694,
+    "length": 508,
+    "answer": "<think>\n <step1>\n VDD(Port)[[176, 46, 446, 64]]\n GND(Port)[[294, 470, 327, 502], [515, 405, 547, 439]]\n Vin(Port)[[83, 306, 100, 324]]\n Vout(Port)[[589, 196, 605, 212]]\n </step1>\n <step2>\n M3(PMOS)[[198, 89, 248, 144]]\n M4(PMOS)[[376, 90, 428, 144]]\n C1(Capacitor)[[513, 261, 550, 286]]\n M1(NMOS)[[153, 287, 206, 343]]\n M2(NMOS)[[418, 288, 468, 342]]\n C2(Capacitor)[[513, 348, 551, 374]]\n ISS(CurrentSource)[[285, 395, 336, 445]]\n </step2>\n <step3>\n node1: [VDD, M3.S, M4.S]\n node2: [M3.G, M3.D, M4.G, M1.D]\n node3: [M4.D, Vout, C1, M2.D]\n node4: [C1, M2.G, C2]\n node5: [M1.G, Vin]\n node6: [M1.S, M2.S, ISS.-]\n node7: [C2, ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [Vin node5 0]\n [GND node7 0]\n [Vout node3 0]\n [C1 node3 node4 Capacitor]\n [C2 node4 node7 Capacitor]\n [M3 node2 node2 node1 PMOS]\n [M4 node2 node3 node1 PMOS]\n [M1 node5 node2 node6 NMOS]\n [M2 node4 node3 node6 NMOS]\n [ISS node7 node6 CurrentSource]\n  </answer>"
+  },
+  {
+    "id": "096",
+    "image": "096.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1036,
+    "length": 714,
+    "answer": "<think>\n <step1>\n VDD(Port)[[191, 50, 837, 70]]\n GND(Port)[[488, 640, 535, 687]]\n Vin1(Port)[[243, 381, 265, 404]]\n Vout2(Port)[[562, 290, 585, 313]]\n Vb(Port)[[91, 140, 113, 163], [913, 140, 936, 162]]\n Vout1(Port)[[440, 290, 462, 312]]\n Vin2(Port)[[242, 473, 265, 497]]\n </step1>\n <step2>\n M1(NMOS)[[310, 357, 381, 431]]\n M2(NMOS)[[645, 359, 715, 433]]\n M3(PMOS)[[160, 113, 228, 189]]\n ISS(CurrentSource)[[477, 533, 548, 605]]\n M4(PMOS)[[797, 113, 868, 190]]\n R1(Resistor)[[352, 93, 400, 149]]\n R2(Resistor)[[627, 93, 673, 149]]\n </step2>\n <step3>\n node1: [M1.G, Vin1]\n node2: [M1.D, M3.D, R1, Vout1]\n node3: [M1.S, M2.S, ISS.-]\n node4: [M2.G, Vin2]\n node5: [M2.D, M4.D, R2, Vout2]\n node6: [M3.G, M4.G, Vb]\n node7: [M3.S, M4.S, R1, R2, VDD]\n node8: [ISS.+, GND]\n </step3>\n </think>\n\n <answer>\n [M1 node1 node2 node3 NMOS]\n [M2 node4 node5 node3 NMOS]\n [M3 node6 node2 node7 PMOS]\n [ISS node8 node3 CurrentSource]\n [M4 node6 node5 node7 PMOS]\n [GND node8 0]\n [R1 node7 node2 Resistor]\n [R2 node7 node5 Resistor]\n [Vin1 node1 0]\n [Vout2 node5 0]\n [Vb node6 0]\n [Vout1 node2 0]\n [Vin2 node4 0]\n [VDD node7 0]\n  </answer>"
+  },
+  {
+    "id": "097",
+    "image": "097.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1350,
+    "length": 1158,
+    "answer": "<think>\n <step1>\n VDD(Port)[[190, 80, 1177, 98]]\n GND(Port)[[687, 1116, 735, 1140]]\n BiasD(Port)[[923, 575, 942, 594]]\n BiasA(Port)[[448, 971, 466, 989]]\n BiasB(Port)[[1231, 175, 1250, 195]]\n BiasC(Port)[[1233, 331, 1250, 351]]\n BiasE(Port)[[1235, 686, 1253, 706]]\n </step1>\n <step2>\n M25(PMOS)[[594, 146, 677, 233]]\n M23(PMOS)[[164, 464, 240, 548]]\n M31(PMOS)[[1052, 146, 1134, 231]]\n M32(PMOS)[[1053, 301, 1136, 387]]\n M28(NMOS)[[595, 623, 673, 708]]\n M26(PMOS)[[596, 302, 678, 388]]\n IBIAS(CurrentSource)[[203, 967, 263, 1027]]\n M22(PMOS)[[233, 302, 314, 387]]\n M30(NMOS)[[598, 939, 679, 1025]]\n M27(NMOS)[[597, 465, 677, 550]]\n M21(PMOS)[[160, 145, 241, 232]]\n M33(NMOS)[[1057, 732, 1137, 816]]\n M29(NMOS)[[666, 782, 745, 866]]\n M24(PMOS)[[159, 783, 242, 870]]\n </step2>\n <step3>\n node1: [M25.G, M31.G, M21.G, BiasB]\n node2: [M25.D, M26.S]\n node3: [M25.S, M31.S, M21.S, VDD]\n node4: [M23.G, M24.G]\n node5: [M23.D, M32.G, M26.G, M22.G, M24.S, BiasC]\n node6: [M23.S, M22.D]\n node7: [M31.D, M32.S]\n node8: [M32.D, M33.G, M33.D, BiasE]\n node9: [M28.G, M26.D, M27.G, M27.D]\n node10: [M28.D, M27.S, M29.G, BiasD]\n node11: [M28.S, M30.G, M29.D, BiasA]\n node12: [IBIAS.+, M30.S, M33.S, GND]\n node13: [IBIAS.-, M24.D]\n node14: [M22.S, M21.D]\n node15: [M30.D, M29.S]\n </step3>\n </think>\n\n <answer>\n [GND node12 0]\n [BiasD node10 0]\n [BiasA node11 0]\n [BiasB node1 0]\n [BiasC node5 0]\n [BiasE node8 0]\n [VDD node3 0]\n [M25 node1 node2 node3 PMOS]\n [M23 node4 node5 node6 PMOS]\n [M31 node1 node7 node3 PMOS]\n [M32 node5 node8 node7 PMOS]\n [M28 node9 node10 node11 NMOS]\n [M26 node5 node9 node2 PMOS]\n [IBIAS node12 node13 CurrentSource]\n [M22 node5 node6 node14 PMOS]\n [M30 node11 node15 node12 NMOS]\n [M27 node9 node9 node10 NMOS]\n [M21 node1 node14 node3 PMOS]\n [M33 node8 node8 node12 NMOS]\n [M29 node10 node11 node15 NMOS]\n [M24 node4 node13 node5 PMOS]\n  </answer>"
+  },
+  {
+    "id": "098",
+    "image": "098.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1314,
+    "length": 722,
+    "answer": "<think>\n <step1>\n VDD(Port)[[278, 106, 1001, 132]]\n GND(Port)[[292, 634, 341, 686], [600, 635, 649, 687]]\n CK(Port)[[511, 205, 536, 231], [201, 376, 227, 402], [855, 411, 880, 436], [510, 547, 534, 573]]\n Q(Port)[[1196, 308, 1222, 335]]\n </step1>\n <step2>\n M1(PMOS)[[247, 176, 326, 263]]\n M7(PMOS)[[899, 178, 976, 261]]\n M4(PMOS)[[555, 179, 631, 262]]\n M2(PMOS)[[244, 348, 325, 434]]\n M5(PMOS)[[554, 349, 632, 435]]\n M9(NMOS)[[896, 383, 977, 469]]\n M8(NMOS)[[897, 519, 979, 607]]\n M3(NMOS)[[243, 519, 324, 607]]\n M6(NMOS)[[553, 520, 633, 606]]\n </step2>\n <step3>\n node1: [VDD, M1.S, M7.S, M4.S]\n node2: [M1.G, M7.D, Q, M9.D, M3.G]\n node3: [M1.D, M2.S]\n node4: [M7.G, M4.D, M5.S, M8.G]\n node5: [M4.G, CK, M2.G, M9.G, M6.G]\n node6: [M2.D, M5.G, M3.D]\n node7: [M5.D, M8.S, M6.D]\n node8: [M9.S, M8.D]\n node9: [M3.S, M6.S, GND]\n </step3>\n </think>\n\n <answer>\n [Q node2 0]\n [CK node5 0]\n [VDD node1 0]\n [GND node9 0]\n [M1 node2 node3 node1 PMOS]\n [M7 node4 node2 node1 PMOS]\n [M4 node5 node4 node1 PMOS]\n [M2 node5 node6 node3 PMOS]\n [M5 node6 node7 node4 PMOS]\n [M9 node5 node2 node8 NMOS]\n [M8 node4 node8 node7 NMOS]\n [M3 node2 node6 node9 NMOS]\n [M6 node5 node7 node9 NMOS]\n  </answer>"
+  },
+  {
+    "id": "099",
+    "image": "099.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 1314,
+    "length": 722,
+    "answer": "<think>\n <step1>\n VDD(Port)[[280, 106, 1008, 132]]\n GND(Port)[[292, 634, 341, 686], [600, 635, 649, 687]]\n CK(Port)[[201, 376, 227, 402], [510, 547, 534, 573], [511, 205, 536, 231], [855, 411, 880, 436]]\n Q(Port)[[1196, 308, 1222, 335]]\n </step1>\n <step2>\n M6(NMOS)[[553, 520, 633, 606]]\n M1(PMOS)[[247, 176, 326, 263]]\n M3(NMOS)[[243, 519, 324, 607]]\n M4(PMOS)[[555, 179, 631, 262]]\n M7(PMOS)[[899, 178, 976, 261]]\n M5(PMOS)[[554, 349, 632, 435]]\n M2(PMOS)[[244, 348, 325, 434]]\n M8(NMOS)[[897, 519, 979, 607]]\n M9(NMOS)[[896, 383, 977, 469]]\n </step2>\n <step3>\n node1: [M6.G, M4.G, M2.G, M9.G, CK]\n node2: [M6.D, M5.D, M8.S]\n node3: [M6.S, M3.S, GND]\n node4: [M1.G, M3.G, M7.D, M9.D, Q]\n node5: [M1.D, M2.S]\n node6: [M1.S, M4.S, M7.S, VDD]\n node7: [M4.D, M7.G, M5.S, M8.G]\n node8: [M8.D, M9.S]\n node9: [M3.D, M5.G, M2.D]\n </step3>\n </think>\n\n <answer>\n [GND node3 0]\n [CK node1 0]\n [Q node4 0]\n [VDD node6 0]\n [M6 node1 node2 node3 NMOS]\n [M1 node4 node5 node6 PMOS]\n [M3 node4 node9 node3 NMOS]\n [M4 node1 node7 node6 PMOS]\n [M7 node7 node4 node6 PMOS]\n [M5 node9 node2 node7 PMOS]\n [M2 node1 node9 node5 PMOS]\n [M8 node7 node8 node2 NMOS]\n [M9 node1 node4 node8 NMOS]\n  </answer>"
+  },
+  {
+    "id": "100",
+    "image": "100.png",
+    "problem": "<image>请根据下图识别端口与器件,并生成该电路的网表。",
+    "width": 760,
+    "length": 606,
+    "answer": "<think>\n <step1>\n VDD(Port)[[305, 44, 601, 61]]\n GND(Port)[[95, 515, 127, 550], [404, 558, 437, 593]]\n Vout(Port)[[632, 196, 649, 213]]\n </step1>\n <step2>\n LD(Inductor)[[399, 93, 443, 163]]\n R1(Resistor)[[557, 112, 592, 153]]\n C1(Capacitor)[[467, 121, 507, 146]]\n M2(NMOS)[[374, 221, 426, 275]]\n M1(NMOS)[[373, 375, 424, 428]]\n LG(Inductor)[[240, 383, 309, 425]]\n RS(Resistor)[[161, 385, 202, 423]]\n Vin(VoltageSource)[[85, 446, 138, 499]]\n L1(Inductor)[[399, 457, 442, 523]]\n </step2>\n <step3>\n node1: [VDD, LD, R1, C1, M2.G]\n node2: [LD, R1, C1, Vout, M2.D]\n node3: [M2.S, M1.D]\n node4: [M1.G, LG]\n node5: [M1.S, L1]\n node6: [LG, RS]\n node7: [RS, Vin.+]\n node8: [Vin.-, L1, GND]\n </step3>\n </think>\n\n <answer>\n [VDD node1 0]\n [GND node8 0]\n [Vout node2 0]\n [LD node1 node2 Inductor]\n [R1 node1 node2 Resistor]\n [LG node6 node4 Inductor]\n [RS node7 node6 Resistor]\n [Vin node7 node8 VoltageSource]\n [L1 node5 node8 Inductor]\n [C1 node1 node2 Capacitor]\n [M2 node1 node2 node3 NMOS]\n [M1 node4 node3 node5 NMOS]\n  </answer>"
+  }
+]
